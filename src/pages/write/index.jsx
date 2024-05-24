@@ -13,7 +13,6 @@ import Header from '../../components/header';
 import Left_Arrow from '../../assets/img/Left_Arrow.svg';
 
 const Write = () => {
-	const [mainImgURL, setMainImgURL] = useState('');
 	const history = useNavigate();
 
 	//React-Quil
@@ -80,13 +79,19 @@ const Write = () => {
 		setValue(contents);
 	};
 
-	const onSubmit = () => {};
+	const onSubmit = () => {
+		history('/writedetail', {
+			state: {
+				title: title,
+				value: value,
+			},
+		});
+	};
 
 	return (
 		<_.Write_Container>
 			<Header />
 			<_.Write_Layout>
-
 				<_.Write_Left>
 					<_.Write_Left_Top>
 						<_.Write_Title_Input

@@ -13,6 +13,7 @@ export const Header_Container = styled.div`
   p {
     font-size: 38px;
     font-family: 'Pretendard-Black';
+    cursor: pointer;
   }
 
   button {

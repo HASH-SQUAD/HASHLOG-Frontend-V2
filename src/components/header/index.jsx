@@ -5,10 +5,16 @@ import * as _ from './style';
 const Header = ({ Write_State }) => {
 	const AccessToken = localStorage.getItem('accessToken');
 	const history = useNavigate();
-	
+
 	return (
 		<_.Header_Container>
-			<p>#</p>
+			<p
+				onClick={() => {
+					history('/');
+				}}
+			>
+				#
+			</p>
 			{!AccessToken ? (
 				<button
 					onClick={() => {
