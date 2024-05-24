@@ -1,9 +1,10 @@
 /*eslint-disable */
 import React, { useState } from 'react';
-import Logo from '../../assets/img/Login_Logo.svg';
 import { useNavigate } from 'react-router-dom';
 import yup from 'yup'
+
 import * as _ from './style';
+import Logo from '../../assets/img/Login_Logo.svg';
 
 const SignUp = () => {
 	const history = useNavigate();

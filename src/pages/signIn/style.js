@@ -34,7 +34,6 @@ export const SigIn_Button = styled.button`
 	width: 400px;
 	height: 50px;
 	font-size: 24px;
-	font-family: 'Pretendard-Bold';
 	background-color: black;
 	color: white;
 	cursor: pointer;
