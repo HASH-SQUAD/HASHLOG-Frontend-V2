@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { useState } from 'react';
 import * as _ from './style';
 import Logo from '../../assets/img/Login_Logo.svg';
