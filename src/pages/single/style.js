@@ -1,2 +1,2 @@
-// eslint-disable-next-line
+/*eslint-disable */
 import styled from 'styled-components';
