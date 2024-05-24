@@ -5,8 +5,15 @@ import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
 	const history = useNavigate();
+
+	/* eslint-disable */
 	const [userId, setUserId] = useState('');
 	const [password, setPassword] = useState('');
+	/* eslint-enable */
+
+	const onSubmit = () => {};
+
+	const activeEnter = () => {};
 
 	return (
 		<_.SignIn_Container>
