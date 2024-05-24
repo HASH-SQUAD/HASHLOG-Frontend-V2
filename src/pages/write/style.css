@@ -1,0 +1,79 @@
+.ql-toolbar.ql-snow {
+	border: none;
+	padding: 0;
+}
+
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+	border: none;
+}
+
+.ql-editor {
+	padding: 10px 0px;
+}
+
+.ql-editor p {
+	font-size: 16px;
+}
+
+button.ql-header svg {
+	display: none;
+}
+
+.ql-header {
+	color: #7B7E83;
+}
+
+/* .ql-header[value='1']:after {
+	content: '';
+	width: 20px;
+	height: 20px;
+	background-image: url('../../assets/img/Icon_H1.svg');
+	background-size: cover;
+	display: inline-block;
+	margin-top: -1px;
+	margin-left: 1px;
+} */
+
+.ql-header[value='1']:after {
+	clear: both;
+	content: 'H1';
+	display: table;
+	font-size: 18px !important;
+	font-family: 'Pretendard-Bold';
+	margin-top: -2px;
+	margin-left: 1px;
+}
+
+.ql-header[value='2']:after {
+	clear: both;
+	content: 'H2';
+	display: table;
+	font-size: 18px !important;
+	font-family: 'Pretendard-Bold';
+	margin-top: -2px;
+	margin-left: 1px;
+}
+
+.ql-header[value='3']:after {
+	clear: both;
+	content: 'H3';
+	display: table;
+	font-size: 18px !important;
+	font-family: 'Pretendard-Bold';
+	margin-top: -2px;
+	margin-left: 1px;
+}
+
+.ql-header[value='4']:after {
+	clear: both;
+	content: 'H4';
+	display: table;
+	font-size: 18px !important;
+	font-family: 'Pretendard-Bold';
+	margin-top: -2px;
+	margin-left: 1px;
+}
+
+button.ql-header.ql-active {
+	color: #3891d0;
+}
