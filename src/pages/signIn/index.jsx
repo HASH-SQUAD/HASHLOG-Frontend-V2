@@ -1,19 +1,46 @@
 /*eslint-disable */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from 'react-query';
+import Swal from 'sweetalert2'
 
 import * as _ from './style';
 import Logo from '../../assets/img/Login_Logo.svg';
+import { AuthSignIn } from '../../libs/api/Auth';
 
 const SignIn = () => {
 	const history = useNavigate();
-
-	/* eslint-disable */
 	const [userId, setUserId] = useState('');
 	const [password, setPassword] = useState('');
-	/* eslint-enable */
 
-	const onSubmit = () => {};
+	const { isLoading: isLoadingStart, mutate: SignInAuth } = useMutation(
+		AuthSignIn,
+		{
+			onSuccess: (res) => {
+				console.log(res);
+				localStorage.setItem('accesToken', res.accessToken);
+				localStorage.setItem('refreshToken', res.refreshToken);
+				Swal.fire({
+					position: 'top-end',
+					icon: 'success',
+					title: '정상적으로 로그인 되었습니다.',
+					showConfirmButton: false,
+					timer: 1500,
+				});
+				history('/');
+			},
+			onError: (err) => {
+				console.log(err)
+			},
+		}
+	);
+
+	const onSubmit = () => {
+		SignInAuth({
+			userid: userId,
+			password: password,
+		});
+	};
 
 	const activeEnter = () => {};
 

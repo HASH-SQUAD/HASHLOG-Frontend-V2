@@ -1,7 +1,7 @@
-/*eslint-disable */
+/* eslint-disable */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import yup from 'yup'
+import yup from 'yup';
 
 import * as _ from './style';
 import Logo from '../../assets/img/Login_Logo.svg';
