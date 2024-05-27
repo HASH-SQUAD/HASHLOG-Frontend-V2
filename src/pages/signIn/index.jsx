@@ -50,7 +50,11 @@ const SignIn = () => {
 		});
 	};
 
-	const activeEnter = () => {};
+	const activeEnter = (e) => {
+		if (e.key === 'Enter') {
+			handleSubmit();
+		}
+	};
 
 	return (
 		<_.SignIn_Container>

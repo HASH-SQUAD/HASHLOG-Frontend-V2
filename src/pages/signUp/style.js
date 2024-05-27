@@ -40,6 +40,15 @@ export const SiginIn_PW_Input = styled.input`
 	margin-bottom: 20px;
 `;
 
+export const SiginIn_PW_CheckInput = styled.input`
+	width: 400px;
+	height: 50px;
+	font-size: 14px;
+	font-family: 'Pretendard-Thin';
+	text-indent: 6px;
+	margin-bottom: 20px;
+`;
+
 export const SiginIn_EMAIL_Input = styled.input`
 	width: 400px;
 	height: 50px;
