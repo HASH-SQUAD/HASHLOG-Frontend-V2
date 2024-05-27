@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 import * as _ from './style';
 import Logo from '../../assets/img/Login_Logo.svg';
@@ -30,7 +30,15 @@ const SignIn = () => {
 				history('/');
 			},
 			onError: (err) => {
-				console.log(err)
+				Swal.fire({
+					position: 'top-end',
+					icon: 'error',
+					title: err.response.data.message,
+					showConfirmButton: false,
+					timer: 1500,
+				});
+				console.log(err.response.data.message);
+				console.log(err);
 			},
 		}
 	);
