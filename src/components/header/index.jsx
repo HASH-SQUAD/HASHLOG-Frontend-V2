@@ -49,6 +49,7 @@ const Header = ({ Write_State }) => {
 					<button
 						onClick={() => {
 							localStorage.removeItem('accessToken');
+							localStorage.removeItem('refreshToken');
 							window.location.reload();
 						}}
 					>

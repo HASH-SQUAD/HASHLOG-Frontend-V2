@@ -16,11 +16,12 @@ const Main = () => {
 			<img src={Poster} alt='Main Poster' />
 
 			<_.Main_Content>
-				{data.map((item, index) => (
+				{data.map((item) => (
 					<_.Main_Content_Body
 						onClick={() => {
 							history(`/${item.id}`);
 						}}
+						key={item.id}
 					>
 						<Content
 							imgURL={item.imgURL}
