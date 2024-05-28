@@ -61,7 +61,7 @@ const SignUp = () => {
 			.validate(formData, { abortEarly: false })
 			.then(() => {
 				console.log('success');
-				SignInAuth(formData);
+				// SignInAuth(formData);
 			})
 			.catch((validationErrors) => {
 				validationErrors.inner.forEach((error) => {
