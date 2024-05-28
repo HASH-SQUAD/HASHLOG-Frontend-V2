@@ -1,4 +1,4 @@
-const data = [
+const PostData = [
 	{
 		id: '1',
 		imgURL:
@@ -105,4 +105,4 @@ const data = [
 	},
 ];
 
-export default data;
+export default PostData;

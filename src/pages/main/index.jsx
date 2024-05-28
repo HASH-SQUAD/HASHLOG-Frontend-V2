@@ -1,14 +1,28 @@
-/*eslint-disable */
-import React from 'react';
+// /*eslint-disable */
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 
 import * as _ from './style';
 import Header from '../../components/header';
 import Content from '../../components/content';
+import { MainPost } from '../../libs/api/Post';
+import PostDatas from '../../data/Contents';
 import Poster from '../../assets/img/Poster.jpg';
-import noImg from '../../assets/img/NoImg.jpg';
-import data from '../../data/Contents';
 
 const Main = () => {
+	const history = useNavigate();
+
+	const { isLoading, isError, data, error } = useQuery('MainPoster', MainPost, {
+		refetchOnWindowFocus: false,
+		retry: 0,
+		onSuccess: (data) => {
+		},
+		onError: (e) => {
+			console.log(e.message);
+		},
+	});
+
 	return (
 		<_.Main_Container>
 			<Header Write_State={false} />
@@ -16,7 +30,7 @@ const Main = () => {
 			<img src={Poster} alt='Main Poster' />
 
 			<_.Main_Content>
-				{data.map((item) => (
+				{data?.data?.map((item) => (
 					<_.Main_Content_Body
 						onClick={() => {
 							history(`/${item.id}`);
@@ -24,7 +38,7 @@ const Main = () => {
 						key={item.id}
 					>
 						<Content
-							imgURL={item.imgURL}
+							imgURL={item.mainImg}
 							subHeading={item.subheading}
 							date={item.date}
 							title={item.title}
