@@ -3,6 +3,7 @@ import React, { useEffect, useState, useMemo, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import * as DOMPurify from 'isomorphic-dompurify';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from 'react-query';
 
 //style
 import * as _ from './style.js';
@@ -11,9 +12,26 @@ import './style.css';
 //Components
 import Header from '../../components/header';
 import Left_Arrow from '../../assets/img/Left_Arrow.svg';
+import { Upload_Img } from '../../libs/api/Post.js';
 
 const Write = () => {
 	const history = useNavigate();
+
+	const { isLoading: isLoadingStart, mutate: UploadImg } = useMutation(
+		Upload_Img,
+		{
+			onSuccess: (res) => {
+				console.log(res.url);
+				const IMG_URL = res.url;
+				const editor = quillRef.current.getEditor();
+				const range = editor.getSelection();
+				editor.insertEmbed(range.index, 'image', IMG_URL);
+			},
+			onError: (err) => {
+				console.log(err);
+			},
+		}
+	);
 
 	//React-Quil
 	const quillRef = useRef();
@@ -29,19 +47,7 @@ const Write = () => {
 			const file = input.files[0];
 			const formData = new FormData();
 			formData.append('img', file);
-			try {
-				// await customAxios.post('/img/upload', formData).then((res) => {
-				// 	const IMG_URL = res.data.url;
-				// 	if (mainImgURL === '') {
-				// 		setMainImgURL(res.data.url);
-				// 	}
-				// 	const editor = quillRef.current.getEditor();
-				// 	const range = editor.getSelection();
-				// 	editor.insertEmbed(range.index, 'image', IMG_URL);
-				// });
-			} catch (error) {
-				console.log(error);
-			}
+			UploadImg(formData);
 		});
 	};
 	const modules = useMemo(() => {
