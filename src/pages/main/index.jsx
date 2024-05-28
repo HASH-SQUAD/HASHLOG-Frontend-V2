@@ -12,7 +12,7 @@ const Main = () => {
 	return (
 		<_.Main_Container>
 			<Header Write_State={false} />
- 
+
 			<img src={Poster} alt='Main Poster' />
 
 			<_.Main_Content>

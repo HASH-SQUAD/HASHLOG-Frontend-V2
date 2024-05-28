@@ -18,7 +18,7 @@ const SignIn = () => {
 		{
 			onSuccess: (res) => {
 				console.log(res);
-				localStorage.setItem('accesToken', res.accessToken);
+				localStorage.setItem('accessToken', res.accessToken);
 				localStorage.setItem('refreshToken', res.refreshToken);
 				Swal.fire({
 					position: 'top-end',
@@ -52,7 +52,7 @@ const SignIn = () => {
 
 	const activeEnter = (e) => {
 		if (e.key === 'Enter') {
-			handleSubmit();
+			onSubmit();
 		}
 	};
 

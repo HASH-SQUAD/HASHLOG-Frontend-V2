@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
+
 import * as _ from './style';
+import { AuthState } from '../../libs/api/Auth';
 
 const Header = ({ Write_State }) => {
 	const AccessToken = localStorage.getItem('accessToken');
 	const history = useNavigate();
+
+	const { isLoading, isError, data, error } = useQuery('AuthState', AuthState, {
+		refetchOnWindowFocus: false,
+		retry: 0,
+		onSuccess: (data) => {
+			console.log(data);
+		},
+		onError: (e) => {
+			console.log(e.message);
+		},
+	});
 
 	return (
 		<_.Header_Container>
@@ -15,7 +29,7 @@ const Header = ({ Write_State }) => {
 			>
 				#
 			</p>
-			{!AccessToken ? (
+			{!data ? (
 				<button
 					onClick={() => {
 						history('/auth/signin');
