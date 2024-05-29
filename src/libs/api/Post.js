@@ -9,3 +9,8 @@ export const Upload_Img = async params => {
 	const { data } = await AuthInstance.post(`/upload/image`, params);
 	return data;
 };
+
+export const Upload_Post = async params => {
+	const { data } = await AuthInstance.post(`/post/`, params);
+	return data;
+};

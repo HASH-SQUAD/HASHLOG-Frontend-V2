@@ -1,14 +1,16 @@
 // /*eslint-disable */
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useMutation } from 'react-query';
 
 import * as _ from './style';
 import Header from '../../components/header';
 import UploadingImg from '../../assets/img/UploadImg.svg';
-import { useMutation } from 'react-query';
-import { Upload_Img } from '../../libs/api/Post';
+import { Upload_Img, Upload_Post } from '../../libs/api/Post';
+import Swal from 'sweetalert2';
 
 const WriteDetail = () => {
+	const history = useNavigate();
 	//데이터 처리
 	const location = useLocation();
 	const WriteData = location.state;
@@ -16,7 +18,7 @@ const WriteDetail = () => {
 	const [data, setData] = useState({
 		title: '',
 		desc: '',
-		mainImg: 'http://localhost:3000/uploads/NoImg.jpg',
+		mainImg: '',
 		subheading: '',
 	});
 	useEffect(() => {
@@ -30,11 +32,10 @@ const WriteDetail = () => {
 	}, [WriteData]);
 
 	//썸네일 업로드
-	const { isLoading: isLoadingStart, mutate: UploadImg } = useMutation(
+	const { isLoading: UploadImgLoading, mutate: UploadImg } = useMutation(
 		Upload_Img,
 		{
 			onSuccess: (res) => {
-				console.log(res.url);
 				setData((data) => ({ ...data, mainImg: res.url }));
 			},
 			onError: (err) => {
@@ -49,8 +50,43 @@ const WriteDetail = () => {
 		UploadImg(formData);
 	};
 
+	console.log(data);
 	//게시글 업로드
-	const onSubmit = () => {};
+	const { isLoading: UploadPostLoading, mutate: UploadPost } = useMutation(
+		Upload_Post,
+		{
+			onSuccess: (res) => {
+				console.log(res);
+				Swal.fire({
+					position: 'top-end',
+					icon: 'success',
+					title: '게시글 작성이 완료되었습니다.',
+					showConfirmButton: false,
+					timer: 1500,
+				});
+				history('/');
+			},
+			onError: (err) => {
+				console.log(err);
+			},
+		}
+	);
+	const onSubmit = () => {
+		if (!data.subheading) {
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				title: '소제목을 입력해주세요.',
+				showConfirmButton: false,
+				timer: 1500,
+			});
+		} else {
+			UploadPost({
+				...data,
+				mainImg: 'http://localhost:3000/uploads/NoImg.jpg',
+			});
+		}
+	};
 
 	return (
 		<_.Detail_Container>
@@ -68,10 +104,7 @@ const WriteDetail = () => {
 							</>
 						) : (
 							<>
-								<img
-									src='http://localhost:3000/uploads/NoImg.jpg'
-									alt='No Image'
-								/>
+								<img src={UploadingImg} alt='No Image' />
 								<_.Detail_ImgInput_Label for='ImgUploadInput'>
 									썸네일 업로드
 								</_.Detail_ImgInput_Label>
