@@ -3,7 +3,8 @@ import React, { useEffect, useState, useMemo, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import * as DOMPurify from 'isomorphic-dompurify';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
+import Swal from 'sweetalert2';
 
 //style
 import * as _ from './style.js';
@@ -13,10 +14,34 @@ import './style.css';
 import Header from '../../components/header';
 import Left_Arrow from '../../assets/img/Left_Arrow.svg';
 import { Upload_Img } from '../../libs/api/Post.js';
+import { AuthState } from '../../libs/api/Auth.js';
 
 const Write = () => {
 	const history = useNavigate();
 
+	//로그인 상태관리
+	const { isLoading, isError, data, error } = useQuery(
+		'Header_AuthState',
+		AuthState,
+		{
+			refetchOnWindowFocus: false,
+			retry: 0,
+		}
+	);
+	useEffect(() => {
+		if (isError) {
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				title: '로그인 후 이용해주세요',
+				showConfirmButton: false,
+				timer: 1500,
+			});
+			history('/auth/signin');
+		}
+	});
+
+	//이미지 업로드 처리
 	const { isLoading: isLoadingStart, mutate: UploadImg } = useMutation(
 		Upload_Img,
 		{
@@ -86,6 +111,26 @@ const Write = () => {
 	};
 
 	const onSubmit = () => {
+		if (!title) {
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				title: '제목을 입력해주세요',
+				showConfirmButton: false,
+				timer: 1500,
+			});
+			return;
+		}
+		if (!value) {
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				title: '내용을 입력해주세요',
+				showConfirmButton: false,
+				timer: 1500,
+			});
+			return;
+		}
 		history('/writedetail', {
 			state: {
 				title: title,
