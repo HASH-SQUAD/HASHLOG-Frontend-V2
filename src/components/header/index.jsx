@@ -9,15 +9,9 @@ const Header = ({ Write_State }) => {
 	const AccessToken = localStorage.getItem('accessToken');
 	const history = useNavigate();
 
-	const { isLoading, isError, data, error } = useQuery('AuthState', AuthState, {
+	const { isLoading, isError, data, error } = useQuery('Header_AuthState', AuthState, {
 		refetchOnWindowFocus: false,
 		retry: 0,
-		onSuccess: (data) => {
-			console.log(data);
-		},
-		onError: (e) => {
-			console.log(e.message);
-		},
 	});
 
 	return (
