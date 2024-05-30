@@ -10,8 +10,7 @@ import { Upload_Img, Upload_Post } from '../../libs/api/Post';
 import Swal from 'sweetalert2';
 
 const WriteDetail = () => {
-	const history = useNavigate();
-	//데이터 처리
+	const navigate = useNavigate();
 	const location = useLocation();
 	const WriteData = location.state;
 
@@ -21,28 +20,35 @@ const WriteDetail = () => {
 		mainImg: '',
 		subheading: '',
 	});
+
 	useEffect(() => {
 		if (WriteData) {
 			setData({
 				title: WriteData.title,
 				desc: WriteData.value,
 				mainImg: '',
+				subheading: '',
 			});
 		}
 	}, [WriteData]);
 
-	//썸네일 업로드
+	useEffect(() => {
+		console.log(data);
+	}, [data]);
+
+	// 썸네일 업로드
 	const { isLoading: UploadImgLoading, mutate: UploadImg } = useMutation(
 		Upload_Img,
 		{
 			onSuccess: (res) => {
-				setData((data) => ({ ...data, mainImg: res.url }));
+				setData((prevData) => ({ ...prevData, mainImg: res.url }));
 			},
 			onError: (err) => {
 				console.log(err);
 			},
 		}
 	);
+
 	const onUploadImg = (e) => {
 		const file = e.currentTarget.files[0];
 		const formData = new FormData();
@@ -50,13 +56,11 @@ const WriteDetail = () => {
 		UploadImg(formData);
 	};
 
-	console.log(data);
-	//게시글 업로드
+	// 게시글 업로드
 	const { isLoading: UploadPostLoading, mutate: UploadPost } = useMutation(
 		Upload_Post,
 		{
 			onSuccess: (res) => {
-				console.log(res);
 				Swal.fire({
 					position: 'top-end',
 					icon: 'success',
@@ -64,13 +68,14 @@ const WriteDetail = () => {
 					showConfirmButton: false,
 					timer: 1500,
 				});
-				history('/');
+				navigate('/');
 			},
 			onError: (err) => {
 				console.log(err);
 			},
 		}
 	);
+
 	const onSubmit = () => {
 		if (!data.subheading) {
 			Swal.fire({
@@ -83,7 +88,7 @@ const WriteDetail = () => {
 		} else {
 			UploadPost({
 				...data,
-				mainImg: 'http://localhost:3000/uploads/NoImg.jpg',
+				mainImg: data.mainImg || 'http://localhost:3000/uploads/NoImg.jpg',
 			});
 		}
 	};
@@ -98,14 +103,14 @@ const WriteDetail = () => {
 						{data.mainImg ? (
 							<>
 								<img src={data.mainImg} alt='Uploading Image' />
-								<_.Detail_ImgInput_Label for='ImgUploadInput'>
+								<_.Detail_ImgInput_Label htmlFor='ImgUploadInput'>
 									재업로드
 								</_.Detail_ImgInput_Label>
 							</>
 						) : (
 							<>
 								<img src={UploadingImg} alt='No Image' />
-								<_.Detail_ImgInput_Label for='ImgUploadInput'>
+								<_.Detail_ImgInput_Label htmlFor='ImgUploadInput'>
 									썸네일 업로드
 								</_.Detail_ImgInput_Label>
 							</>
@@ -122,7 +127,7 @@ const WriteDetail = () => {
 					<_.Detail_Subheading>
 						<_.Detail_SubInput
 							placeholder='내용을 입력해주세요'
-							spellcheck='false'
+							spellCheck='false'
 							onChange={(e) => {
 								setData({
 									...data,

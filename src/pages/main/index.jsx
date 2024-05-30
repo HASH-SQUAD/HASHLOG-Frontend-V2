@@ -1,4 +1,4 @@
-// /*eslint-disable */
+/*eslint-disable */
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
@@ -16,8 +16,6 @@ const Main = () => {
 	const { isLoading, isError, data, error } = useQuery('MainPoster', MainPost, {
 		refetchOnWindowFocus: false,
 		retry: 0,
-		onSuccess: (data) => {
-		},
 		onError: (e) => {
 			console.log(e.message);
 		},

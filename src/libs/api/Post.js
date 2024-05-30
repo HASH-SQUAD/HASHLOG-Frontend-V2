@@ -14,3 +14,8 @@ export const Upload_Post = async params => {
 	const { data } = await AuthInstance.post(`/post/`, params);
 	return data;
 };
+
+export const GetPostById = async params => {
+	const { data } = await DefaultInstance.get(`/post/${params.queryKey[1]}`, params);
+	return data;
+};

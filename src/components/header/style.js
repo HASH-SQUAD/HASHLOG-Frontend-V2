@@ -2,35 +2,40 @@ import styled from 'styled-components';
 
 export const Header_Container = styled.div`
 	width: 100vw;
-  height: 50px;
+	height: 50px;
 	display: flex;
 	flex-direction: row;
-  border-bottom: 1px black solid;
-  justify-content: space-between;
-  padding: 0px 200px;
-  align-items: center;
+	border-bottom: 1px black solid;
+	justify-content: space-between;
+	padding: 0px 200px;
+	align-items: center;
 
-  p {
-    font-size: 38px;
-    font-family: 'Pretendard-Black';
-    cursor: pointer;
-  }
+	//드래그 방지
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 
-  button {
-    width: 70px;
-    height: 30px;
-    background: black;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-  }
+	p {
+		font-size: 38px;
+		font-family: 'Pretendard-Black';
+		cursor: pointer;
+	}
 
+	button {
+		width: 70px;
+		height: 30px;
+		background: black;
+		border: none;
+		border-radius: 5px;
+		color: white;
+		font-size: 14px;
+		cursor: pointer;
+	}
 `;
 
 export const Header_WriteState = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-`
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+`;
