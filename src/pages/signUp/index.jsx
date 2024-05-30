@@ -31,7 +31,7 @@ const SignUp = () => {
 		{
 			onSuccess: (res) => {
 				console.log(res);
-				localStorage.setItem('accesToken', res.accessToken);
+				localStorage.setItem('accessToken', res.accessToken);
 				localStorage.setItem('refreshToken', res.refreshToken);
 				Swal.fire({
 					position: 'top-end',
@@ -60,8 +60,7 @@ const SignUp = () => {
 		validationSchema
 			.validate(formData, { abortEarly: false })
 			.then(() => {
-				console.log('success');
-				// SignInAuth(formData);
+				SignInAuth(formData);
 			})
 			.catch((validationErrors) => {
 				validationErrors.inner.forEach((error) => {
