@@ -34,6 +34,9 @@ const Header = ({ Write_State }) => {
 				</button>
 			) : !Write_State ? (
 				<_.Header_WriteState>
+					<_.Header_Nickname>
+						{data?.data.nickname}
+					</_.Header_Nickname>
 					<button
 						onClick={() => {
 							history('/write');

@@ -7,6 +7,7 @@ export const Header_Container = styled.div`
 	flex-direction: row;
 	border-bottom: 1px black solid;
 	justify-content: space-between;
+	align-items: center;
 	padding: 0px 200px;
 	align-items: center;
 
@@ -32,6 +33,16 @@ export const Header_Container = styled.div`
 		font-size: 14px;
 		cursor: pointer;
 	}
+`;
+
+export const Header_Nickname = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	cursor: pointer;
+	height: 30px;
+	font-size: 18px;
+	font-family: 'Pretendard-Regular';
 `;
 
 export const Header_WriteState = styled.div`
