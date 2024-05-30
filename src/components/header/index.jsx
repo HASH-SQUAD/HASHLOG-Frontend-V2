@@ -10,12 +10,11 @@ const Header = ({ Write_State }) => {
 	const AccessToken = localStorage.getItem('accessToken');
 	const history = useNavigate();
 
-	const { isLoading, isError, data, error } = useQuery('Header_AuthState', AuthState, {
+	const { isLoading, isError, data, error } = useQuery('Header AuthState', AuthState, {
 		refetchOnWindowFocus: false,
 		retry: 0,
 	});
 
-	
 	return (
 		<_.Header_Container>
 			<p
