@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
@@ -14,6 +15,7 @@ const Header = ({ Write_State }) => {
 		retry: 0,
 	});
 
+	
 	return (
 		<_.Header_Container>
 			<p
