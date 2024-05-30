@@ -21,7 +21,7 @@ const Write = () => {
 
 	//로그인 상태관리
 	const { isLoading, isError, data, error } = useQuery(
-		'Header_AuthState',
+		'Write AuthState',
 		AuthState,
 		{
 			refetchOnWindowFocus: false,

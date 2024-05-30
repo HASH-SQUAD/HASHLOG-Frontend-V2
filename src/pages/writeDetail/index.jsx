@@ -1,18 +1,51 @@
 // /*eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 
 import * as _ from './style';
 import Header from '../../components/header';
 import UploadingImg from '../../assets/img/UploadImg.svg';
 import { Upload_Img, Upload_Post } from '../../libs/api/Post';
 import Swal from 'sweetalert2';
+import { AuthState } from '../../libs/api/Auth';
 
 const WriteDetail = () => {
-	const navigate = useNavigate();
+	const history = useNavigate();
 	const location = useLocation();
 	const WriteData = location.state;
+
+	//로그인 상태관리
+	const { isLoading, isError, LoginStateData, error } = useQuery(
+		'WriteDetail AuthState',
+		AuthState,
+		{
+			refetchOnWindowFocus: false,
+			retry: 0,
+		}
+	);
+	useEffect(() => {
+		if (!WriteData) {
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				title: '글을 작성해주세요',
+				showConfirmButton: false,
+				timer: 1500,
+			});
+			history('/write');
+		}
+		if (isError) {
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				title: '로그인 후 이용해주세요',
+				showConfirmButton: false,
+				timer: 1500,
+			});
+			history('/auth/signin');
+		}
+	});
 
 	const [data, setData] = useState({
 		title: '',
@@ -68,7 +101,7 @@ const WriteDetail = () => {
 					showConfirmButton: false,
 					timer: 1500,
 				});
-				navigate('/');
+				history('/');
 			},
 			onError: (err) => {
 				console.log(err);
