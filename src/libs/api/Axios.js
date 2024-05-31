@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useMutation } from 'react-query';
 import { RefreshAccessToken } from './Auth';
 
-const AUTH_URL = 'http://localhost:3000/';
+const AUTH_URL = process.env.REACT_APP_SERVER_ORIGIN;
 
 export const AuthInstance = axios.create({
 	baseURL: AUTH_URL,
