@@ -6,6 +6,7 @@ import * as _ from './style';
 import Header from '../../components/header';
 import { useQuery } from 'react-query';
 import { GetPostById } from '../../libs/api/Post';
+import Swal from 'sweetalert2';
 
 const Single = () => {
 	const postId = window.location.pathname.split('/')[1];
@@ -21,6 +22,17 @@ const Single = () => {
 			},
 		}
 	);
+
+	const Preparing = () => {
+		Swal.fire({
+			position: 'top-end',
+			icon: 'error',
+			title: '준비중인 기능입니다.',
+			showConfirmButton: false,
+			timer: 1500,
+		});
+	};
+
 	return (
 		<_.Single_Container>
 			<Header />
@@ -32,8 +44,8 @@ const Single = () => {
 						<_.Single_Date>{data?.data.createdAt.substr(0, 10)}</_.Single_Date>
 					</_.Single_Info>
 					<_.Single_EditTools>
-						<button>수정</button>
-						<button>삭제</button>
+						<button onClick={Preparing}>수정</button>
+						<button onClick={Preparing}>삭제</button>
 					</_.Single_EditTools>
 				</_.Single_Info_Layout>
 
