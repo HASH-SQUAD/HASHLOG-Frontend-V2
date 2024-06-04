@@ -18,10 +18,8 @@ import { AuthState } from '../../libs/api/Auth.js';
 
 const Write = () => {
 	const history = useNavigate();
-
 	const location = useLocation();
 	const WriteData = location.state;
-	console.log(WriteData);
 
 	//로그인 상태관리
 	const { isLoading, isError, data, error } = useQuery(
@@ -143,6 +141,7 @@ const Write = () => {
 				mainImg: WriteData?.mainImg,
 				createdAt: WriteData?.createdAt,
 				nickname: WriteData?.nickname,
+				postId: WriteData?.postId,
 				edit: true,
 			},
 		});

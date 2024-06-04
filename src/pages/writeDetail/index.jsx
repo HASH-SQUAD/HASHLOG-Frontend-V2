@@ -6,7 +6,7 @@ import { useMutation, useQuery } from 'react-query';
 import * as _ from './style';
 import Header from '../../components/header';
 import UploadingImg from '../../assets/img/UploadImg.svg';
-import { Upload_Img, Upload_Post } from '../../libs/api/Post';
+import { Upload_Img, Upload_Post, Update_Post } from '../../libs/api/Post';
 import Swal from 'sweetalert2';
 import { AuthState } from '../../libs/api/Auth';
 
@@ -14,6 +14,7 @@ const WriteDetail = () => {
 	const history = useNavigate();
 	const location = useLocation();
 	const WriteData = location.state;
+	const postId = window.location.pathname.split('/')[1];
 
 	//로그인 상태관리
 	const { isLoading, isError, LoginStateData, error } = useQuery(
@@ -126,8 +127,42 @@ const WriteDetail = () => {
 		}
 	};
 
+	//게시글 수정
+	const { isLoading: UpdatePostLoading, mutate: UpdatePost } = useMutation(
+		Update_Post,
+		{
+			onSuccess: (res) => {
+				console.log(res);
+				Swal.fire({
+					position: 'top-end',
+					icon: 'success',
+					title: '게시글 수정이 완료되었습니다.',
+					showConfirmButton: false,
+					timer: 1500,
+				});
+				history('/');
+			},
+			onError: (err) => {
+				console.log(err);
+			},
+		}
+	);
 	const onEdit = () => {
-
+		if (!data.subheading) {
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				title: '소제목을 입력해주세요.',
+				showConfirmButton: false,
+				timer: 1500,
+			});
+		} else {
+			UpdatePost({
+				...data,
+				postId: WriteData.postId,
+				mainImg: data.mainImg || 'http://localhost:3000/uploads/NoImg.jpg',
+			});
+		}
 	};
 
 	return (
