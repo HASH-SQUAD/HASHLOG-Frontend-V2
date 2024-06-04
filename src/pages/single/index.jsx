@@ -1,5 +1,6 @@
 /*eslint-disable */
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import DOMPurify from 'isomorphic-dompurify';
 import Swal from 'sweetalert2';
 
@@ -10,6 +11,8 @@ import { GetPostById } from '../../libs/api/Post';
 import { AuthState } from '../../libs/api/Auth';
 
 const Single = () => {
+	const history = useNavigate();
+
 	const postId = window.location.pathname.split('/')[1];
 	const { isLoading, data: post } = useQuery(
 		['GetPostById', postId],
@@ -28,6 +31,15 @@ const Single = () => {
 		refetchOnWindowFocus: false,
 		retry: 0,
 	});
+
+	const EditPost = () => {
+		history('/writedetail', {
+			state: {
+				title: post?.data.title,
+				value: post?.data.desc,
+			},
+		});
+	};
 
 	const Preparing = () => {
 		Swal.fire({
@@ -51,7 +63,7 @@ const Single = () => {
 					</_.Single_Info>
 					{post?.data?.User?.nickname === auth?.data?.nickname ? (
 						<_.Single_EditTools>
-							<button onClick={Preparing}>수정</button>
+							<button onClick={EditPost}>수정</button>
 							<button onClick={Preparing}>삭제</button>
 						</_.Single_EditTools>
 					) : (
