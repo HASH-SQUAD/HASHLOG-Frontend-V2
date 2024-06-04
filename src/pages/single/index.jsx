@@ -12,8 +12,8 @@ import { AuthState } from '../../libs/api/Auth';
 
 const Single = () => {
 	const history = useNavigate();
-
 	const postId = window.location.pathname.split('/')[1];
+
 	const { isLoading, data: post } = useQuery(
 		['GetPostById', postId],
 		GetPostById,
@@ -32,15 +32,23 @@ const Single = () => {
 		retry: 0,
 	});
 
+	//게시글 수정
 	const EditPost = () => {
 		history('/write', {
 			state: {
 				title: post?.data.title,
 				value: post?.data.desc,
+				subheading: post?.data.subheading,
+				mainImg: post?.data.mainImg,
+				createdAt: post?.data.createdAt,
+				nickname: post?.data.User.nickname,
+				postId: postId,
+				edit: true,
 			},
 		});
 	};
 
+	//게시글 삭제
 	const { isLoading: isLoadingStart, mutate: deletePost } = useMutation(
 		(postId) => DeletePostById({ postId }),
 		{
@@ -66,7 +74,7 @@ const Single = () => {
 			confirmButtonColor: '#3085d6',
 			confirmButtonText: '예',
 			cancelButtonColor: '#d33',
-			cancelButtonText: '아니요'
+			cancelButtonText: '아니요',
 		}).then((result) => {
 			if (result.isConfirmed) {
 				deletePost(postId);

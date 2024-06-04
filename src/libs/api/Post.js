@@ -27,3 +27,9 @@ export const DeletePostById = async ({ postId }) => {
 	const { data } = await AuthInstance.delete(`/post/${postId}`);
 	return data;
 };
+
+export const Update_Post = async params => {
+	console.log(params.postId);
+	const { data } = await AuthInstance.put(`/post/${params.postId}`, params);
+	return data;
+};
