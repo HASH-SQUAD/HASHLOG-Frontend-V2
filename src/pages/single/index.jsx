@@ -37,6 +37,11 @@ const Single = () => {
 			state: {
 				title: post?.data.title,
 				value: post?.data.desc,
+				subheading: post?.data.subheading,
+				mainImg: post?.data.mainImg,
+				createdAt: post?.data.createdAt,
+				nickname: post?.data.User.nickname,
+				edit: true,
 			},
 		});
 	};
@@ -66,7 +71,7 @@ const Single = () => {
 			confirmButtonColor: '#3085d6',
 			confirmButtonText: '예',
 			cancelButtonColor: '#d33',
-			cancelButtonText: '아니요'
+			cancelButtonText: '아니요',
 		}).then((result) => {
 			if (result.isConfirmed) {
 				deletePost(postId);

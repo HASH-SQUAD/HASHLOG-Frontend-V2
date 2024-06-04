@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import * as DOMPurify from 'isomorphic-dompurify';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 import Swal from 'sweetalert2';
 
@@ -18,6 +18,10 @@ import { AuthState } from '../../libs/api/Auth.js';
 
 const Write = () => {
 	const history = useNavigate();
+
+	const location = useLocation();
+	const WriteData = location.state;
+	console.log(WriteData);
 
 	//로그인 상태관리
 	const { isLoading, isError, data, error } = useQuery(
@@ -60,8 +64,8 @@ const Write = () => {
 
 	//React-Quil
 	const quillRef = useRef();
-	const [title, setTitle] = useState('');
-	const [value, setValue] = useState('');
+	const [title, setTitle] = useState(WriteData.title);
+	const [value, setValue] = useState(WriteData.value);
 	const imageHandler = () => {
 		const input = document.createElement('input');
 		input.setAttribute('type', 'file');
@@ -135,6 +139,11 @@ const Write = () => {
 			state: {
 				title: title,
 				value: value,
+				subheading: WriteData?.subheading,
+				mainImg: WriteData?.mainImg,
+				createdAt: WriteData?.createdAt,
+				nickname: WriteData?.nickname,
+				edit: true,
 			},
 		});
 	};
@@ -150,6 +159,7 @@ const Write = () => {
 							onChange={(e) => {
 								setTitle(e.currentTarget.value);
 							}}
+							value={title}
 						/>
 						<_.Write_Line />
 						<ReactQuill
@@ -167,7 +177,9 @@ const Write = () => {
 							<img src={Left_Arrow} alt='Left_Arrow' />
 							나가기
 						</_.Write_Left_Arrow>
-						<button onClick={onSubmit}>올리기</button>
+						<button onClick={onSubmit}>
+							{WriteData.edit ? '수정하기' : '올리기'}
+						</button>
 					</_.Write_Left_Bottom>
 				</_.Write_Left>
 

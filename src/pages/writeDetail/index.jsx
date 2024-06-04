@@ -59,15 +59,15 @@ const WriteDetail = () => {
 			setData({
 				title: WriteData.title,
 				desc: WriteData.value,
-				mainImg: '',
-				subheading: '',
+				mainImg: WriteData.mainImg,
+				subheading: WriteData.subheading,
 			});
 		}
 	}, [WriteData]);
 
-	useEffect(() => {
-		console.log(data);
-	}, [data]);
+	// useEffect(() => {
+	// 	console.log(data);
+	// }, [data]);
 
 	// 썸네일 업로드
 	const { isLoading: UploadImgLoading, mutate: UploadImg } = useMutation(
@@ -126,6 +126,10 @@ const WriteDetail = () => {
 		}
 	};
 
+	const onEdit = () => {
+
+	};
+
 	return (
 		<_.Detail_Container>
 			<Header />
@@ -167,10 +171,17 @@ const WriteDetail = () => {
 									subheading: e.currentTarget.value,
 								});
 							}}
+							value={data.subheading}
 						/>
-						<_.Detail_SubmitButton onClick={onSubmit}>
-							출간하기
-						</_.Detail_SubmitButton>
+						{WriteData.edit ? (
+							<_.Detail_SubmitButton onClick={onEdit}>
+								수정하기
+							</_.Detail_SubmitButton>
+						) : (
+							<_.Detail_SubmitButton onClick={onSubmit}>
+								출간하기
+							</_.Detail_SubmitButton>
+						)}
 					</_.Detail_Subheading>
 				</_.Detail_Main>
 			</_.Detail_Layout>
