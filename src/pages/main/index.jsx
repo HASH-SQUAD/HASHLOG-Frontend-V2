@@ -31,7 +31,7 @@ const Main = () => {
 				{data?.data?.map((item) => (
 					<_.Main_Content_Body
 						onClick={() => {
-							history(`/${item.id}`);
+							history(`/post/${item.id}`);
 						}}
 						key={item.id}
 					>

@@ -12,7 +12,7 @@ import { AuthState } from '../../libs/api/Auth';
 
 const Single = () => {
 	const history = useNavigate();
-	const postId = window.location.pathname.split('/')[1];
+	const postId = window.location.pathname.split('/')[2];
 
 	const { isLoading, data: post } = useQuery(
 		['GetPostById', postId],

@@ -23,7 +23,7 @@ export default function Router() {
 			path: '/',
 			children: [
 				{ path: '/', element: <Main /> },
-				{ path: '/:id', element: <Single /> },
+				{ path: '/post/:id', element: <Single /> },
 				{ path: '/write', element: <Write /> },
 				{ path: '/writedetail', element: <WriteDeatil /> },
 				{ path: '/setting', element: <Setting /> },
