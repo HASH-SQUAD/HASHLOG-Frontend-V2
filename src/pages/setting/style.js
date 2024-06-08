@@ -48,9 +48,7 @@ export const Setting_Upload_ProfileImg_Label = styled.label`
 	align-items: center;
 `;
 
-export const Setting_Upload_ProfileImg = styled.input`
-	display: none;
-`;
+export const Setting_Upload_ProfileImg = styled.input`display: none;`;
 
 export const Setting_Delete_ProfileImg = styled.button`
 	border: none;
@@ -106,6 +104,7 @@ export const Setting_Change_Pw = styled.button`
 	margin-top: 90px;
 	cursor: pointer;
 `;
+
 
 export const Setting_DeleteAccount = styled.button`
 	border: none;

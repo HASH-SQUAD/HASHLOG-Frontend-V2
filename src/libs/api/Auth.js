@@ -29,3 +29,8 @@ export const Delete_ProfileImg = async params => {
 	const { data } = await AuthInstance.put(`/auth/delete/profileimg`, params);
 	return data;
 };
+
+export const Update_Password = async params => {
+	const { data } = await AuthInstance.put(`/auth/update/password`, params);
+	return data;
+};
