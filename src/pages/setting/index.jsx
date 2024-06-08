@@ -6,7 +6,11 @@ import Swal from 'sweetalert2';
 
 import * as _ from './style.js';
 import Header from '../../components/header';
-import { AuthState, Update_ProfileImg } from '../../libs/api/Auth.js';
+import {
+	AuthState,
+	Update_ProfileImg,
+	Delete_ProfileImg,
+} from '../../libs/api/Auth.js';
 import { Upload_Img } from '../../libs/api/Post.js';
 
 const Setting = () => {
@@ -14,23 +18,19 @@ const Setting = () => {
 	const { isLoading, data } = useQuery('Setting_AuthState', AuthState, {
 		refetchOnWindowFocus: false,
 		retry: 0,
-		onError: (e) => {
-			console.log(e.message);
-		},
 	});
 
 	// 프로필 업로드
 	const { isLoading: UpdateProfileImgLoading, mutate: UpdateProfileImg } =
 		useMutation(Update_ProfileImg);
+	//이미지 업로드
 	const { isLoading: UploadImgLoading, mutate: UploadImg } = useMutation(
 		Upload_Img,
 		{
 			onSuccess: (res) => {
 				data.data.profileImg = res.url;
 				Update_ProfileImg({ profileImg: res.url });
-			},
-			onError: (err) => {
-				console.log(err);
+				window.location.reload();
 			},
 		}
 	);
@@ -40,9 +40,16 @@ const Setting = () => {
 		const formData = new FormData();
 		formData.append('img', file);
 		UploadImg(formData);
-		window.location.reload();
 	};
 
+	//프로필 삭제
+	const { isLoading: DeleteProfileImgLoading, mutate: DeleteProfile } =
+		useMutation(Delete_ProfileImg);
+
+	const onDeleteProfileImg = () => {
+		DeleteProfile();
+		window.location.reload();
+	};
 
 	return (
 		<_.Setting_Container>
@@ -62,7 +69,9 @@ const Setting = () => {
 						onChange={onUploadImg}
 					/>
 
-					<_.Setting_Delete_ProfileImg>이미지 삭제</_.Setting_Delete_ProfileImg>
+					<_.Setting_Delete_ProfileImg onClick={onDeleteProfileImg}>
+						이미지 삭제
+					</_.Setting_Delete_ProfileImg>
 				</_.Setting_Left>
 
 				<_.Setting_Line />
