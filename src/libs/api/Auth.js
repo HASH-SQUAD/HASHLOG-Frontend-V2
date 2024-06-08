@@ -34,3 +34,8 @@ export const Update_Password = async params => {
 	const { data } = await AuthInstance.put(`/auth/update/password`, params);
 	return data;
 };
+
+export const Update_NickName = async params => {
+	const { data } = await AuthInstance.put(`/auth/update/nickname`, params);
+	return data;
+};
