@@ -39,3 +39,10 @@ export const Update_NickName = async params => {
 	const { data } = await AuthInstance.put(`/auth/update/nickname`, params);
 	return data;
 };
+
+export const Delete_Account = async params => {
+	const { data } = await AuthInstance.delete(`/auth/delete`, {
+		data: params,
+	});
+	return data;
+};
