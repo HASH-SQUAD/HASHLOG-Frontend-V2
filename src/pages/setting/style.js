@@ -1,15 +1,21 @@
 /*eslint-disable */
 import styled from 'styled-components';
 
-export const Setting_Container = styled.div``;
+export const Setting_Container = styled.div`
+	//드래그 방지
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+`;
 
 export const Setting_Layout = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-  gap: 50px;
-  margin-top: 100px;
+	gap: 50px;
+	margin-top: 100px;
 `;
 
 export const Setting_Left = styled.div`
@@ -19,7 +25,7 @@ export const Setting_Left = styled.div`
 	align-items: center;
 	height: 400px;
 	width: 300px;
-  gap: 10px;
+	gap: 10px;
 `;
 
 export const Setting_ProfileImg = styled.img`
@@ -28,15 +34,21 @@ export const Setting_ProfileImg = styled.img`
 	border-radius: 100%;
 `;
 
-export const Setting_Upload_ProfileImg = styled.button`
+export const Setting_Upload_ProfileImg_Label = styled.label`
 	border: none;
 	background-color: black;
 	width: 180px;
 	height: 40px;
 	font-size: 18px;
 	color: white;
-  cursor: pointer;
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 `;
+
+export const Setting_Upload_ProfileImg = styled.input`display: none;`;
 
 export const Setting_Delete_ProfileImg = styled.button`
 	border: none;
@@ -45,7 +57,7 @@ export const Setting_Delete_ProfileImg = styled.button`
 	height: 40px;
 	font-size: 18px;
 	color: black;
-  cursor: pointer;
+	cursor: pointer;
 `;
 
 export const Setting_Line = styled.div`
@@ -60,8 +72,8 @@ export const Setting_Right = styled.div`
 	align-items: center;
 	height: 400px;
 	width: 300px;
-  gap: 10px;
-  padding: 5% 0 0 0;
+	gap: 10px;
+	padding: 5% 0 0 0;
 `;
 
 export const Setting_NickName_Layout = styled.div`
@@ -79,7 +91,7 @@ export const Setting_NickNmae = styled.div`
 export const Setting_NickName_Edit = styled.div`
 	font-size: 20px;
 	color: black;
-  cursor: pointer;
+	cursor: pointer;
 `;
 
 export const Setting_Change_Pw = styled.button`
@@ -89,9 +101,10 @@ export const Setting_Change_Pw = styled.button`
 	height: 40px;
 	font-size: 18px;
 	color: white;
-  margin-top: 90px;
-  cursor: pointer;
+	margin-top: 90px;
+	cursor: pointer;
 `;
+
 
 export const Setting_DeleteAccount = styled.button`
 	border: none;
@@ -100,5 +113,5 @@ export const Setting_DeleteAccount = styled.button`
 	height: 40px;
 	font-size: 18px;
 	color: black;
-  cursor: pointer;
+	cursor: pointer;
 `;
