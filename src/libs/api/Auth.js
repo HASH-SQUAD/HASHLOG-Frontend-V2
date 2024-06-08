@@ -19,3 +19,8 @@ export const RefreshAccessToken = async params => {
 	const { data } = await AuthInstance.post(`/jwt/`, params);
 	return data;
 };
+
+export const Update_ProfileImg = async params => {
+	const { data } = await AuthInstance.put(`/auth/update/profileimg`, params);
+	return data;
+};
