@@ -84,7 +84,13 @@ const Header = ({ Write_State }) => {
 			)}
 			{dropDownState ? (
 				<_.Header_DropDown ref={dropDownRef}>
-					<_.Header_DropDown_Option>설정</_.Header_DropDown_Option>
+					<_.Header_DropDown_Option
+						onClick={() => {
+							history('/setting');
+						}}
+					>
+						설정
+					</_.Header_DropDown_Option>
 					<_.Header_DropDown_Option
 						onClick={() => {
 							localStorage.removeItem('accessToken');
