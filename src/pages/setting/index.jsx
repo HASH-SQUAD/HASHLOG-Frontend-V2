@@ -1,5 +1,5 @@
 // /*eslint-disable */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -12,6 +12,7 @@ import {
 	Delete_ProfileImg,
 	Update_Password,
 	Update_NickName,
+	Delete_Account,
 } from '../../libs/api/Auth.js';
 import { Upload_Img } from '../../libs/api/Post.js';
 import { UpdatePwSchema } from '../../libs/utils/expression/signUp.js';
@@ -21,10 +22,28 @@ import {
 } from '../../libs/utils/alert/top_right_Alert.js';
 
 const Setting = () => {
+	const history = useNavigate();
+
 	//유저 상태 가져오기
-	const { isLoading, data } = useQuery('Setting_AuthState', AuthState, {
-		refetchOnWindowFocus: false,
-		retry: 0,
+	const { isLoading, data, isError } = useQuery(
+		'Setting_AuthState',
+		AuthState,
+		{
+			refetchOnWindowFocus: false,
+			retry: 0,
+		}
+	);
+	useEffect(() => {
+		if (isError) {
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				title: '로그인 후 이용해주세요',
+				showConfirmButton: false,
+				timer: 1500,
+			});
+			history('/auth/signin');
+		}
 	});
 
 	// 프로필이미지 업로드
@@ -104,6 +123,9 @@ const Setting = () => {
 		{
 			onSuccess: (res) => {
 				top_right_TrueAlert(res.message);
+				setTimeout(() => {
+					window.location.reload();
+				}, 1000);
 			},
 			onError: (err) => {
 				top_right_FalseAlert(err.message);
@@ -140,6 +162,39 @@ const Setting = () => {
 							}
 						});
 					});
+			},
+			allowOutsideClick: () => !Swal.isLoading(),
+		});
+	};
+
+	//회원탈퇴
+	const { isLoading: DeleteAccountLoading, mutate: DeleteAccount } =
+		useMutation(Delete_Account, {
+			onSuccess: (res) => {
+				top_right_TrueAlert(res.message);
+				setTimeout(() => {
+					localStorage.removeItem('accessToken');
+					localStorage.removeItem('refreshToken');
+					window.location.reload();
+				}, 1000);
+			},
+			onError: (err) => {
+				top_right_FalseAlert(err.response.data.message);
+			},
+		});
+
+	const openDeleteAccountModal = () => {
+		Swal.fire({
+			title: '계정 삭제',
+			html: '<input type="password" id="pw_input1" class="swal2-input" placeholder="비밀번호를 입력해주세요."/>',
+			showCancelButton: true,
+			cancelButtonText: '취소하기',
+			showLoaderOnConfirm: true,
+			confirmButtonText: '삭제하기',
+			focusConfirm: false,
+			preConfirm: () => {
+				const PW = document.getElementById('pw_input1').value;
+				DeleteAccount({ password: PW });
 			},
 			allowOutsideClick: () => !Swal.isLoading(),
 		});
@@ -182,7 +237,9 @@ const Setting = () => {
 						비밀번호 변경하기
 					</_.Setting_Change_Pw>
 
-					<_.Setting_DeleteAccount>회원탈퇴</_.Setting_DeleteAccount>
+					<_.Setting_DeleteAccount onClick={openDeleteAccountModal}>
+						회원탈퇴
+					</_.Setting_DeleteAccount>
 				</_.Setting_Right>
 			</_.Setting_Layout>
 		</_.Setting_Container>
