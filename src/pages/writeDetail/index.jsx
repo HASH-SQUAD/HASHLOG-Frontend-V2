@@ -1,4 +1,4 @@
-// /*eslint-disable */
+/*eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
