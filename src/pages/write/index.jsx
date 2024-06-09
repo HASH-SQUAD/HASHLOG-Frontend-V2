@@ -62,8 +62,8 @@ const Write = () => {
 
 	//React-Quil
 	const quillRef = useRef();
-	const [title, setTitle] = useState(WriteData.title);
-	const [value, setValue] = useState(WriteData.value);
+	const [title, setTitle] = useState(WriteData?.title);
+	const [value, setValue] = useState(WriteData?.value);
 	const imageHandler = () => {
 		const input = document.createElement('input');
 		input.setAttribute('type', 'file');
@@ -142,7 +142,7 @@ const Write = () => {
 				createdAt: WriteData?.createdAt,
 				nickname: WriteData?.nickname,
 				postId: WriteData?.postId,
-				edit: true,
+				edit: WriteData?.edit,
 			},
 		});
 	};
@@ -158,7 +158,7 @@ const Write = () => {
 							onChange={(e) => {
 								setTitle(e.currentTarget.value);
 							}}
-							value={title}
+							value={title? title : ''}
 						/>
 						<_.Write_Line />
 						<ReactQuill
@@ -177,7 +177,7 @@ const Write = () => {
 							나가기
 						</_.Write_Left_Arrow>
 						<button onClick={onSubmit}>
-							{WriteData.edit ? '수정하기' : '올리기'}
+							{WriteData?.edit ? '수정하기' : '올리기'}
 						</button>
 					</_.Write_Left_Bottom>
 				</_.Write_Left>
