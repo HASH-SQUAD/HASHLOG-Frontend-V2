@@ -40,7 +40,7 @@ const SignUp = () => {
 					showConfirmButton: false,
 					timer: 1500,
 				});
-				history('/');
+				history('/auth/signin');
 			},
 			onError: (err) => {
 				Swal.fire({
