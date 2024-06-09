@@ -27,9 +27,6 @@ const Single = () => {
 			},
 		}
 	);
-	if (postLoading) {
-		return <Loading/>
-	}
 
 	const { data: auth, error } = useQuery('AuthState', AuthState, {
 		refetchOnWindowFocus: false,
@@ -85,6 +82,9 @@ const Single = () => {
 			}
 		});
 	};
+	if (postLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<_.Single_Container>
