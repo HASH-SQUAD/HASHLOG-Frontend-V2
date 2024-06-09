@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import Logo from '../../assets/img/Login_Logo.svg';
 import { AuthSignUp } from '../../libs/api/Auth';
 import { validationSchema } from '../../libs/utils/expression/signUp';
+import Loading from '../loading';
 
 const SignUp = () => {
 	const history = useNavigate();
@@ -19,14 +20,13 @@ const SignUp = () => {
 	};
 
 	const [formData, setFormData] = useState(initialFormData);
-
 	const [useridError, setUseridError] = useState('');
 	const [passwordError, setPasswordError] = useState('');
 	const [passwordCheckError, setPasswordCheckError] = useState('');
 	const [emailError, setEmailError] = useState('');
 	const [nicknameError, setNicknameError] = useState('');
 
-	const { isLoading: isLoadingStart, mutate: SignInAuth } = useMutation(
+	const { isLoading: SignUpAuthLoading, mutate: SignUpAuth } = useMutation(
 		AuthSignUp,
 		{
 			onSuccess: (res) => {
@@ -55,12 +55,15 @@ const SignUp = () => {
 			},
 		}
 	);
+	if (SignUpAuthLoading) {
+		return <Loading />;
+	}
 
 	const onSubmit = () => {
 		validationSchema
 			.validate(formData, { abortEarly: false })
 			.then(() => {
-				SignInAuth(formData);
+				SignUpAuth(formData);
 			})
 			.catch((validationErrors) => {
 				validationErrors.inner.forEach((error) => {
