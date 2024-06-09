@@ -7,13 +7,14 @@ import Swal from 'sweetalert2';
 import * as _ from './style';
 import Logo from '../../assets/img/Login_Logo.svg';
 import { AuthSignIn } from '../../libs/api/Auth';
+import Loading from '../loading';
 
 const SignIn = () => {
 	const history = useNavigate();
 	const [userId, setUserId] = useState('');
 	const [password, setPassword] = useState('');
 
-	const { isLoading: isLoadingStart, mutate: SignInAuth } = useMutation(
+	const { isLoading: SignInAuthLoading, mutate: SignInAuth } = useMutation(
 		AuthSignIn,
 		{
 			onSuccess: (res) => {
@@ -42,6 +43,9 @@ const SignIn = () => {
 			},
 		}
 	);
+	if (SignInAuthLoading) {
+		return <Loading />;
+	}
 
 	const onSubmit = () => {
 		SignInAuth({
