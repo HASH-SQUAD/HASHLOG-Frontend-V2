@@ -22,14 +22,10 @@ const Write = () => {
 	const WriteData = location.state;
 
 	//로그인 상태관리
-	const { isLoading, isError, data, error } = useQuery(
-		'Write AuthState',
-		AuthState,
-		{
-			refetchOnWindowFocus: false,
-			retry: 0,
-		}
-	);
+	const { isError } = useQuery('Write AuthState', AuthState, {
+		refetchOnWindowFocus: false,
+		retry: 0,
+	});
 	useEffect(() => {
 		if (isError) {
 			Swal.fire({
@@ -44,21 +40,18 @@ const Write = () => {
 	});
 
 	//이미지 업로드 처리
-	const { isLoading: isLoadingStart, mutate: UploadImg } = useMutation(
-		Upload_Img,
-		{
-			onSuccess: (res) => {
-				console.log(res.url);
-				const IMG_URL = res.url;
-				const editor = quillRef.current.getEditor();
-				const range = editor.getSelection();
-				editor.insertEmbed(range.index, 'image', IMG_URL);
-			},
-			onError: (err) => {
-				console.log(err);
-			},
-		}
-	);
+	const { mutate: UploadImg } = useMutation(Upload_Img, {
+		onSuccess: (res) => {
+			console.log(res.url);
+			const IMG_URL = res.url;
+			const editor = quillRef.current.getEditor();
+			const range = editor.getSelection();
+			editor.insertEmbed(range.index, 'image', IMG_URL);
+		},
+		onError: (err) => {
+			console.log(err);
+		},
+	});
 
 	//React-Quil
 	const quillRef = useRef();
@@ -158,7 +151,7 @@ const Write = () => {
 							onChange={(e) => {
 								setTitle(e.currentTarget.value);
 							}}
-							value={title? title : ''}
+							value={title ? title : ''}
 						/>
 						<_.Write_Line />
 						<ReactQuill

@@ -9,6 +9,7 @@ import Content from '../../components/content';
 import { MainPost } from '../../libs/api/Post';
 import PostDatas from '../../data/Contents';
 import Poster from '../../assets/img/Poster.jpg';
+import Loading from '../loading';
 
 const Main = () => {
 	const history = useNavigate();
@@ -20,6 +21,9 @@ const Main = () => {
 			console.log(e.message);
 		},
 	});
+	if (isLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<_.Main_Container>

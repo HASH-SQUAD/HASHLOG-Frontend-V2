@@ -9,6 +9,7 @@ import UploadingImg from '../../assets/img/UploadImg.svg';
 import { Upload_Img, Upload_Post, Update_Post } from '../../libs/api/Post';
 import Swal from 'sweetalert2';
 import { AuthState } from '../../libs/api/Auth';
+import Loading from '../loading';
 
 const WriteDetail = () => {
 	const history = useNavigate();
@@ -17,14 +18,10 @@ const WriteDetail = () => {
 	const postId = window.location.pathname.split('/')[1];
 
 	//로그인 상태관리
-	const { isLoading, isError, LoginStateData, error } = useQuery(
-		'WriteDetail AuthState',
-		AuthState,
-		{
-			refetchOnWindowFocus: false,
-			retry: 0,
-		}
-	);
+	const { isError } = useQuery('WriteDetail AuthState', AuthState, {
+		refetchOnWindowFocus: false,
+		retry: 0,
+	});
 	useEffect(() => {
 		if (!WriteData) {
 			Swal.fire({
@@ -65,10 +62,6 @@ const WriteDetail = () => {
 			});
 		}
 	}, [WriteData]);
-
-	// useEffect(() => {
-	// 	console.log(data);
-	// }, [data]);
 
 	// 썸네일 업로드
 	const { isLoading: UploadImgLoading, mutate: UploadImg } = useMutation(
@@ -164,6 +157,10 @@ const WriteDetail = () => {
 			});
 		}
 	};
+
+	if (UploadImgLoading || UpdatePostLoading || UploadPostLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<_.Detail_Container>
