@@ -6,7 +6,7 @@ import LoadingGIF from '../../assets/img/LoadingGIF.gif';
 const Loading = () => {
 	return (
 		<_.Loading_Container>
-			<img src={LoadingGIF} alt='' />
+			<img src={LoadingGIF} alt='LoadingIMG' />
 		</_.Loading_Container>
 	);
 };
