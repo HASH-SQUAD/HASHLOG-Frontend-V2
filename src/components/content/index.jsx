@@ -8,7 +8,9 @@ const Content = ({ imgURL, date, title, desc, subHeading }) => {
 			<_.Content_Info>
 				<_.Content_date>{date}</_.Content_date>
 				<_.Content_title>{title}</_.Content_title>
-				<_.Content_desc>{subHeading}</_.Content_desc>
+				<_.Content_desc>
+					<p>{subHeading}</p>
+				</_.Content_desc>
 			</_.Content_Info>
 		</_.Main_Content_Container>
 	);

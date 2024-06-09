@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Main_Content_Container = styled.div`
 	width: 300px;
@@ -33,12 +33,31 @@ export const Content_date = styled.div`
 `;
 
 export const Content_title = styled.div`
+	width: 250px;
+	height: 30px;
 	font-family: 'Pretendard-SemiBold';
 	font-size: 27px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 `;
 
 export const Content_desc = styled.div`
-	font-family: 'Pretendard-Medium';
-	font-size: 22px;
-	color: #54575f;
+	width: 250px;
+	height: 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+	p {
+		width: 250px;
+		height: 40px;
+		font-family: 'Pretendard-Medium';
+		font-size: 18px;
+		color: #54575f;
+		text-overflow: ellipsis;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+	}
 `;

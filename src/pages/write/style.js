@@ -103,14 +103,19 @@ export const Write_Right = styled.div`
 	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `;
 
-export const Write_Preview_Title = styled.div`
+export const Write_Preview_Title = styled.input`
 	width: 45vw;
 	height: 80px;
 	display: flex;
 	align-items: center;
 	font-size: 40px;
 	font-family: 'Pretendard-Medium';
+	text-indent: 6px;
 	overflow: scroll;
+	border: none;
+	color: black;
+	outline: none;
+	background-color: #f5f5f5;
 `;
 
 export const Write_Preview_Content = styled.div`
@@ -130,5 +135,5 @@ export const Write_Preview_Content = styled.div`
 	img {
 		max-width: 44vw;
 		max-height: 82vh;
-	};
+	}
 `;
