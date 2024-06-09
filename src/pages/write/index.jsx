@@ -22,14 +22,10 @@ const Write = () => {
 	const WriteData = location.state;
 
 	//로그인 상태관리
-	const { isLoading, isError, data, error } = useQuery(
-		'Write AuthState',
-		AuthState,
-		{
-			refetchOnWindowFocus: false,
-			retry: 0,
-		}
-	);
+	const { isError } = useQuery('Write AuthState', AuthState, {
+		refetchOnWindowFocus: false,
+		retry: 0,
+	});
 	useEffect(() => {
 		if (isError) {
 			Swal.fire({
@@ -44,26 +40,23 @@ const Write = () => {
 	});
 
 	//이미지 업로드 처리
-	const { isLoading: isLoadingStart, mutate: UploadImg } = useMutation(
-		Upload_Img,
-		{
-			onSuccess: (res) => {
-				console.log(res.url);
-				const IMG_URL = res.url;
-				const editor = quillRef.current.getEditor();
-				const range = editor.getSelection();
-				editor.insertEmbed(range.index, 'image', IMG_URL);
-			},
-			onError: (err) => {
-				console.log(err);
-			},
-		}
-	);
+	const { mutate: UploadImg } = useMutation(Upload_Img, {
+		onSuccess: (res) => {
+			console.log(res.url);
+			const IMG_URL = res.url;
+			const editor = quillRef.current.getEditor();
+			const range = editor.getSelection();
+			editor.insertEmbed(range.index, 'image', IMG_URL);
+		},
+		onError: (err) => {
+			console.log(err);
+		},
+	});
 
 	//React-Quil
 	const quillRef = useRef();
-	const [title, setTitle] = useState(WriteData.title);
-	const [value, setValue] = useState(WriteData.value);
+	const [title, setTitle] = useState(WriteData?.title);
+	const [value, setValue] = useState(WriteData?.value);
 	const imageHandler = () => {
 		const input = document.createElement('input');
 		input.setAttribute('type', 'file');
@@ -142,7 +135,7 @@ const Write = () => {
 				createdAt: WriteData?.createdAt,
 				nickname: WriteData?.nickname,
 				postId: WriteData?.postId,
-				edit: true,
+				edit: WriteData?.edit,
 			},
 		});
 	};
@@ -158,7 +151,7 @@ const Write = () => {
 							onChange={(e) => {
 								setTitle(e.currentTarget.value);
 							}}
-							value={title}
+							value={title ? title : ''}
 						/>
 						<_.Write_Line />
 						<ReactQuill
@@ -177,7 +170,7 @@ const Write = () => {
 							나가기
 						</_.Write_Left_Arrow>
 						<button onClick={onSubmit}>
-							{WriteData.edit ? '수정하기' : '올리기'}
+							{WriteData?.edit ? '수정하기' : '올리기'}
 						</button>
 					</_.Write_Left_Bottom>
 				</_.Write_Left>

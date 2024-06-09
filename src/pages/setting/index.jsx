@@ -1,4 +1,4 @@
-// /*eslint-disable */
+/*eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +20,7 @@ import {
 	top_right_FalseAlert,
 	top_right_TrueAlert,
 } from '../../libs/utils/alert/top_right_Alert.js';
+import Loading from '../loading/index.jsx';
 
 const Setting = () => {
 	const history = useNavigate();
@@ -74,7 +75,6 @@ const Setting = () => {
 	//프로필이미지 삭제
 	const { isLoading: DeleteProfileImgLoading, mutate: DeleteProfile } =
 		useMutation(Delete_ProfileImg);
-
 	const onDeleteProfileImg = () => {
 		DeleteProfile();
 		top_right_TrueAlert('성공적으로 삭제되었습니다.');
@@ -199,6 +199,24 @@ const Setting = () => {
 			allowOutsideClick: () => !Swal.isLoading(),
 		});
 	};
+	if (isLoading) {
+		return <Loading />;
+	}
+	if (UpdateProfileImgLoading) {
+		return <Loading />;
+	}
+	if (DeleteProfileImgLoading) {
+		return <Loading />;
+	}
+	if (UpdateNickNameLoading) {
+		return <Loading />;
+	}
+	if (UpdatePwLoading) {
+		return <Loading />;
+	}
+	if (DeleteAccountLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<_.Setting_Container>

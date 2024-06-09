@@ -9,12 +9,13 @@ import Header from '../../components/header';
 import { useMutation, useQuery } from 'react-query';
 import { DeletePostById, GetPostById } from '../../libs/api/Post';
 import { AuthState } from '../../libs/api/Auth';
+import Loading from '../loading';
 
 const Single = () => {
 	const history = useNavigate();
 	const postId = window.location.pathname.split('/')[2];
 
-	const { isLoading, data: post } = useQuery(
+	const { isLoading: postLoading, data: post } = useQuery(
 		['GetPostById', postId],
 		GetPostById,
 		{
@@ -81,6 +82,9 @@ const Single = () => {
 			}
 		});
 	};
+	if (postLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<_.Single_Container>
