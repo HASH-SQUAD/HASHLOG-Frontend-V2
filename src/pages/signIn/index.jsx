@@ -1,16 +1,28 @@
 /*eslint-disable */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import Swal from 'sweetalert2';
 
 import * as _ from './style';
 import Logo from '../../assets/img/Login_Logo.svg';
-import { AuthSignIn } from '../../libs/api/Auth';
+import { AuthSignIn, AuthState } from '../../libs/api/Auth';
 import Loading from '../loading';
 
 const SignIn = () => {
 	const history = useNavigate();
+
+	//유저 상태 가져오기
+	const { data } = useQuery('Setting_AuthState', AuthState, {
+		refetchOnWindowFocus: false,
+		retry: 0,
+	});
+	useEffect(() => {
+		if (data) {
+			history('/');
+		}
+	});
+
 	const [userId, setUserId] = useState('');
 	const [password, setPassword] = useState('');
 
