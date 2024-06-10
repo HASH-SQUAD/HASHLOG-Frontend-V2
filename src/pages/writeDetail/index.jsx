@@ -95,6 +95,7 @@ const WriteDetail = () => {
 					timer: 1500,
 				});
 				history('/');
+				window.location.reload();
 			},
 			onError: (err) => {
 				console.log(err);
@@ -114,7 +115,7 @@ const WriteDetail = () => {
 		} else {
 			UploadPost({
 				...data,
-				mainImg: data.mainImg || 'http://localhost:3000/uploads/NoImg.jpg',
+				mainImg: data.mainImg || 'http://localhost:3000/common/NoImg.jpg',
 			});
 		}
 	};
@@ -133,6 +134,7 @@ const WriteDetail = () => {
 					timer: 1500,
 				});
 				history('/');
+				window.location.reload();
 			},
 			onError: (err) => {
 				console.log(err);
@@ -152,7 +154,7 @@ const WriteDetail = () => {
 			UpdatePost({
 				...data,
 				postId: WriteData.postId,
-				mainImg: data.mainImg || 'http://localhost:3000/uploads/NoImg.jpg',
+				mainImg: data.mainImg || 'http://localhost:3000/common/NoImg.jpg',
 			});
 		}
 	};
