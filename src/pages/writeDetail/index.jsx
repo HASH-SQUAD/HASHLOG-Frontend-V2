@@ -51,14 +51,13 @@ const WriteDetail = () => {
 		mainImg: '',
 		subheading: '',
 	});
-
 	useEffect(() => {
 		if (WriteData) {
 			setData({
-				title: WriteData.title,
-				desc: WriteData.value,
-				mainImg: WriteData.mainImg,
-				subheading: WriteData.subheading,
+				title: WriteData?.title,
+				desc: WriteData?.value,
+				mainImg: WriteData?.mainImg,
+				subheading: WriteData?.subheading,
 			});
 		}
 	}, [WriteData]);
@@ -205,7 +204,7 @@ const WriteDetail = () => {
 							}}
 							value={data.subheading}
 						/>
-						{WriteData.edit ? (
+						{WriteData?.edit ? (
 							<_.Detail_SubmitButton onClick={onEdit}>
 								수정하기
 							</_.Detail_SubmitButton>

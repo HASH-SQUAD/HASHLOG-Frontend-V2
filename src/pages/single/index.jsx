@@ -28,7 +28,7 @@ const Single = () => {
 		}
 	);
 
-	const { data: auth, error } = useQuery('AuthState', AuthState, {
+	const { data: auth } = useQuery('AuthState', AuthState, {
 		refetchOnWindowFocus: false,
 		retry: 0,
 	});
@@ -93,6 +93,7 @@ const Single = () => {
 				<_.Single_Title>{post?.data.title}</_.Single_Title>
 				<_.Single_Info_Layout>
 					<_.Single_Info>
+						<_.Single_ProfileImg src={auth?.data.profileImg} alt='ProfileImg' />
 						<_.Single_Nickname>{post?.data?.User?.nickname}</_.Single_Nickname>
 						<_.Single_Date>{post?.data.createdAt.substr(0, 10)}</_.Single_Date>
 					</_.Single_Info>

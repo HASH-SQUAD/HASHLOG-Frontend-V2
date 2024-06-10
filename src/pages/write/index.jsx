@@ -176,7 +176,7 @@ const Write = () => {
 				</_.Write_Left>
 
 				<_.Write_Right>
-					<_.Write_Preview_Title>{title}</_.Write_Preview_Title>
+					<_.Write_Preview_Title value={title} readOnly />
 					<_.Write_Line />
 					<_.Write_Preview_Content
 						dangerouslySetInnerHTML={{

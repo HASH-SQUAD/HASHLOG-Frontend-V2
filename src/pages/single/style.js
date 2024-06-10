@@ -34,6 +34,12 @@ export const Single_Info = styled.div`
 	gap: 6px;
 `;
 
+export const Single_ProfileImg = styled.img `
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+`
+
 export const Single_Nickname = styled.div`
 	font-size: 16px;
 	font-family: 'Pretendard-Regular';
