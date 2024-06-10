@@ -77,7 +77,6 @@ export const Detail_SubInput = styled.textarea`
 	font-size: 16px;
 	font-family: 'Pretendard-Thin';
 	padding: 8px 8px;
-	text-indent: 6px;
 `;
 
 export const Detail_SubmitButton = styled.button`
