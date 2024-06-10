@@ -1,5 +1,5 @@
 /*eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,21 +7,48 @@ import * as _ from './style';
 import Header from '../../components/header';
 import Content from '../../components/content';
 import { MainPost } from '../../libs/api/Post';
-import PostDatas from '../../data/Contents';
 import Poster from '../../assets/img/Poster.jpg';
 import Loading from '../loading';
 
 const Main = () => {
 	const history = useNavigate();
+	const [page, setPage] = useState(1);
+	const [posts, setPosts] = useState([]);
 
-	const { isLoading, isError, data, error } = useQuery('MainPoster', MainPost, {
+	const {
+		isLoading: GetPostLoading,
+		data,
+		isFetching,
+	} = useQuery(['MainPoster', page], () => MainPost({ page }), {
+		keepPreviousData: true,
 		refetchOnWindowFocus: false,
 		retry: 0,
 		onError: (e) => {
 			console.log(e.message);
 		},
 	});
-	if (isLoading) {
+
+	useEffect(() => {
+		if (data) {
+			setPosts((prevPosts) => [...prevPosts, ...data.data]);
+		}
+	}, [data]);
+
+	const handleScroll = useCallback(() => {
+		if (
+			window.innerHeight + window.scrollY >= document.body.offsetHeight - 2 &&
+			!isFetching
+		) {
+			setPage((prevPage) => prevPage + 1);
+		}
+	}, [isFetching]);
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, [handleScroll]);
+
+	if (GetPostLoading && page === 1) {
 		return <Loading />;
 	}
 
@@ -32,7 +59,7 @@ const Main = () => {
 			<img src={Poster} alt='Main Poster' />
 
 			<_.Main_Content>
-				{data?.data?.map((item) => (
+				{posts.map((item) => (
 					<_.Main_Content_Body
 						onClick={() => {
 							history(`/post/${item.id}`);
@@ -48,6 +75,7 @@ const Main = () => {
 						/>
 					</_.Main_Content_Body>
 				))}
+				{isFetching && <Loading />}
 			</_.Main_Content>
 		</_.Main_Container>
 	);
