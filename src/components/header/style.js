@@ -8,7 +8,7 @@ export const Header_Container = styled.div`
 	border-bottom: 1px black solid;
 	justify-content: space-between;
 	align-items: center;
-	padding: 0px 200px;
+	padding: 0px 10%;
 	align-items: center;
 
 	//드래그 방지

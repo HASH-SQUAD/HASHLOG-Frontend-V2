@@ -79,6 +79,7 @@ const Single = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				deletePost(postId);
+				history('/');
 				window.location.reload();
 			}
 		});
