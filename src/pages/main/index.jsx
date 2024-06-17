@@ -1,5 +1,5 @@
 /*eslint-disable */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,6 +14,8 @@ const Main = () => {
 	const history = useNavigate();
 	const [page, setPage] = useState(1);
 	const [posts, setPosts] = useState([]);
+	const postsRef = useRef(new Set());
+	const [hasMore, setHasMore] = useState(true);
 
 	const {
 		isLoading: GetPostLoading,
@@ -30,18 +32,27 @@ const Main = () => {
 
 	useEffect(() => {
 		if (data) {
-			setPosts((prevPosts) => [...prevPosts, ...data.data]);
+			if (data.data.length === 0) {
+				setHasMore(false);
+			} else {
+				const newPosts = data.data.filter(
+					(post) => !postsRef.current.has(post.id)
+				);
+				newPosts.forEach((post) => postsRef.current.add(post.id));
+				setPosts((prevPosts) => [...prevPosts, ...newPosts]);
+			}
 		}
 	}, [data]);
 
 	const handleScroll = useCallback(() => {
 		if (
 			window.innerHeight + window.scrollY >= document.body.offsetHeight - 2 &&
-			!isFetching
+			!isFetching &&
+			hasMore
 		) {
 			setPage((prevPage) => prevPage + 1);
 		}
-	}, [isFetching]);
+	}, [isFetching, hasMore]);
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll);
