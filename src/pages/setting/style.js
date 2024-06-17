@@ -16,6 +16,26 @@ export const Setting_Layout = styled.div`
 	justify-content: center;
 	gap: 50px;
 	margin-top: 100px;
+
+	@media only screen and (max-width: 1299px) {
+		flex-direction: row;
+	}
+
+	@media only screen and (max-width: 940px) {
+		flex-direction: row;
+	}
+
+	@media only screen and (max-width: 768px) {
+		flex-direction: row;
+	}
+
+	@media only screen and (max-width: 430px) {
+		flex-direction: column;
+	}
+
+	@media only screen and (max-width: 375px) {
+		flex-direction: column;
+	}
 `;
 
 export const Setting_Left = styled.div`
@@ -64,6 +84,30 @@ export const Setting_Line = styled.div`
 	background-color: black;
 	width: 1px;
 	height: 300px;
+
+	@media only screen and (max-width: 1299px) {
+		flex-direction: row;
+	}
+
+	@media only screen and (max-width: 940px) {
+		flex-direction: row;
+	}
+
+	@media only screen and (max-width: 768px) {
+		flex-direction: row;
+	}
+
+	@media only screen and (max-width: 430px) {
+		flex-direction: column;
+		width: 80%;
+		height: 1px;
+	}
+
+	@media only screen and (max-width: 375px) {
+		flex-direction: column;
+		width: 80%;
+		height: 1px;
+	}
 `;
 
 export const Setting_Right = styled.div`
@@ -104,7 +148,6 @@ export const Setting_Change_Pw = styled.button`
 	margin-top: 90px;
 	cursor: pointer;
 `;
-
 
 export const Setting_DeleteAccount = styled.button`
 	border: none;
