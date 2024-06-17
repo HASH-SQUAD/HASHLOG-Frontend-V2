@@ -29,6 +29,26 @@ export const SiginIn_ID_Input = styled.input`
 	font-family: 'Pretendard-Thin';
 	text-indent: 6px;
 	margin-bottom: 20px;
+
+	@media only screen and (max-width: 1299px) {
+		width: 30%;
+	}
+
+	@media only screen and (max-width: 940px) {
+		width: 40%;
+	}
+
+	@media only screen and (max-width: 768px) {
+		width: 40%;
+	}
+
+	@media only screen and (max-width: 430px) {
+		width: 80%;
+	}
+
+	@media only screen and (max-width: 375px) {
+		width: 80%;
+	}
 `;
 
 export const SiginIn_PW_Input = styled.input`
@@ -38,6 +58,26 @@ export const SiginIn_PW_Input = styled.input`
 	font-family: 'Pretendard-Thin';
 	text-indent: 6px;
 	margin-bottom: 20px;
+
+	@media only screen and (max-width: 1299px) {
+		width: 30%;
+	}
+
+	@media only screen and (max-width: 940px) {
+		width: 40%;
+	}
+
+	@media only screen and (max-width: 768px) {
+		width: 40%;
+	}
+
+	@media only screen and (max-width: 430px) {
+		width: 80%;
+	}
+
+	@media only screen and (max-width: 375px) {
+		width: 80%;
+	}
 `;
 
 export const SiginIn_PW_CheckInput = styled.input`
@@ -47,6 +87,26 @@ export const SiginIn_PW_CheckInput = styled.input`
 	font-family: 'Pretendard-Thin';
 	text-indent: 6px;
 	margin-bottom: 20px;
+
+	@media only screen and (max-width: 1299px) {
+		width: 30%;
+	}
+
+	@media only screen and (max-width: 940px) {
+		width: 40%;
+	}
+
+	@media only screen and (max-width: 768px) {
+		width: 40%;
+	}
+
+	@media only screen and (max-width: 430px) {
+		width: 80%;
+	}
+
+	@media only screen and (max-width: 375px) {
+		width: 80%;
+	}
 `;
 
 export const SiginIn_EMAIL_Input = styled.input`
@@ -56,6 +116,26 @@ export const SiginIn_EMAIL_Input = styled.input`
 	font-family: 'Pretendard-Thin';
 	text-indent: 6px;
 	margin-bottom: 20px;
+
+	@media only screen and (max-width: 1299px) {
+		width: 30%;
+	}
+
+	@media only screen and (max-width: 940px) {
+		width: 40%;
+	}
+
+	@media only screen and (max-width: 768px) {
+		width: 40%;
+	}
+
+	@media only screen and (max-width: 430px) {
+		width: 80%;
+	}
+
+	@media only screen and (max-width: 375px) {
+		width: 80%;
+	}
 `;
 
 export const SiginIn_NICKNAME_Input = styled.input`
@@ -65,6 +145,26 @@ export const SiginIn_NICKNAME_Input = styled.input`
 	font-family: 'Pretendard-Thin';
 	text-indent: 6px;
 	margin-bottom: 20px;
+
+	@media only screen and (max-width: 1299px) {
+		width: 30%;
+	}
+
+	@media only screen and (max-width: 940px) {
+		width: 40%;
+	}
+
+	@media only screen and (max-width: 768px) {
+		width: 40%;
+	}
+
+	@media only screen and (max-width: 430px) {
+		width: 80%;
+	}
+
+	@media only screen and (max-width: 375px) {
+		width: 80%;
+	}
 `;
 
 export const SigIn_Button = styled.button`
@@ -74,6 +174,26 @@ export const SigIn_Button = styled.button`
 	background-color: black;
 	color: white;
 	cursor: pointer;
+
+	@media only screen and (max-width: 1299px) {
+		width: 30%;
+	}
+
+	@media only screen and (max-width: 940px) {
+		width: 40%;
+	}
+
+	@media only screen and (max-width: 768px) {
+		width: 40%;
+	}
+
+	@media only screen and (max-width: 430px) {
+		width: 80%;
+	}
+
+	@media only screen and (max-width: 375px) {
+		width: 80%;
+	}
 `;
 
 export const SignIn_NO_Exist = styled.div`

@@ -8,6 +8,15 @@ export const Single_Container = styled.div`
 export const Single_Layout = styled.div`
 	width: 100vw;
 	padding: 20px 26vw;
+	@media only screen and (max-width: 1299px) {
+		padding: 20px 26vw;
+	}
+	@media only screen and (max-width: 940px) {
+		padding: 20px 20vw;
+	}
+	@media only screen and (max-width: 600px) {
+		padding: 20px 10vw;
+	}
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
