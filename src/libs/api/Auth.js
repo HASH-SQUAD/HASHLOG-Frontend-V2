@@ -46,3 +46,15 @@ export const Delete_Account = async params => {
 	});
 	return data;
 };
+
+export const Get_UserList = async page => {
+	const { data } = await AuthInstance.get(`/auth/adminLNRnUy7s5T`, {
+		params: { page },
+	});
+	return data;
+};
+
+export const Get_UserById = async page => {
+	const { data } = await AuthInstance.get(`/auth/admincrhinqi`);
+	return data;
+};

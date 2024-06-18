@@ -53,6 +53,7 @@ export const Admin_Content = styled.div`
 	justify-content: start;
 	align-items: center;
 	gap: 10px;
+	overflow: scroll;
 `;
 
 export const Admin_Content_Layout = styled.div`
