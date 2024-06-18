@@ -229,7 +229,7 @@ const Setting = () => {
 						이미지 업로드
 					</_.Setting_Upload_ProfileImg_Label>
 
-					<_.Setting_Upload_ProfileImg
+					<_.Setting_Upload_ProfileImg	
 						id='ImgUploadInput'
 						type='file'
 						accept='.png, .jpeg, .jpg'
