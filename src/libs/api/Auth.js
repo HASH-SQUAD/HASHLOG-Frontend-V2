@@ -41,20 +41,16 @@ export const Update_NickName = async params => {
 };
 
 export const Delete_Account = async params => {
-	const { data } = await AuthInstance.delete(`/auth/delete`, {
-		data: params,
-	});
+	const { data } = await AuthInstance.delete(`/auth/delete`, params);
 	return data;
 };
 
-export const Get_UserList = async page => {
-	const { data } = await AuthInstance.get(`/auth/adminLNRnUy7s5T`, {
-		params: { page },
-	});
+export const Get_UserList = async params => {
+	const { data } = await AuthInstance.get(`/auth/adminLNRnUy7s5T`, params);
 	return data;
 };
 
-export const Get_UserById = async page => {
-	const { data } = await AuthInstance.get(`/auth/admincrhinqi`);
+export const Get_UserById = async params => {
+	const { data } = await AuthInstance.post(`/auth/admincrhinqi`, params);
 	return data;
 };

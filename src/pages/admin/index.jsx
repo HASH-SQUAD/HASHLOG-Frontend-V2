@@ -1,11 +1,11 @@
 /*eslint-disable */
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 
 import * as _ from './style.js';
 import Header from '../../components/header/';
 import { SearchIcon } from '../../assets/img/SearchIcon';
-import { Get_UserList } from '../../libs/api/Auth.js';
+import { Get_UserById, Get_UserList } from '../../libs/api/Auth.js';
 import Loading from '../loading';
 
 const Admin = () => {
@@ -14,6 +14,8 @@ const Admin = () => {
 	const usersRef = useRef(new Set());
 	const [hasMore, setHasMore] = useState(true);
 	const contentRef = useRef(null);
+	const [userId, setUserId] = useState('');
+	const [isSearch, setIsSearch] = useState(false);
 
 	const {
 		isLoading: AllUserListLoading,
@@ -29,7 +31,7 @@ const Admin = () => {
 	});
 
 	useEffect(() => {
-		if (data?.data) {
+		if (!isSearch && data?.data) {
 			if (data.data.length === 0) {
 				setHasMore(false);
 			} else {
@@ -40,7 +42,7 @@ const Admin = () => {
 				setUsers((prevUsers) => [...prevUsers, ...newUsers]);
 			}
 		}
-	}, [data]);
+	}, [data, isSearch]);
 
 	const handleScroll = useCallback(() => {
 		const element = contentRef.current;
@@ -65,7 +67,29 @@ const Admin = () => {
 		};
 	}, [handleScroll]);
 
-	if (AllUserListLoading && page === 1) {
+	const { isLoading: GetUserListByIdLoading, mutate: GetUserListById } =
+		useMutation(Get_UserById, {
+			onSuccess: (res) => {
+				setUsers(res.data ? [res.data] : []);
+				setHasMore(false);
+			},
+			onError: (err) => {
+				console.log(err);
+			},
+		});
+
+	const onSubmit = () => {
+		setIsSearch(true);
+		GetUserListById({ userId: userId });
+	};
+
+	const activeEnter = (e) => {
+		if (e.key === 'Enter') {
+			onSubmit();
+		}
+	};
+
+	if ((AllUserListLoading && page === 1) || GetUserListByIdLoading) {
 		return <Loading />;
 	}
 
@@ -75,8 +99,14 @@ const Admin = () => {
 
 			<_.Admin_Layout>
 				<_.Admin_SearchBar>
-					<_.Admin_Input type='text' placeholder='유저아이디를 입력하세요.' />
-					<_.Admin_Search_Icon>
+					<_.Admin_Input
+						onKeyDown={activeEnter}
+						placeholder='유저아이디를 입력하세요.'
+						onChange={(e) => {
+							setUserId(e.currentTarget.value);
+						}}
+					/>
+					<_.Admin_Search_Icon onClick={onSubmit}>
 						<SearchIcon />
 					</_.Admin_Search_Icon>
 				</_.Admin_SearchBar>
@@ -85,7 +115,10 @@ const Admin = () => {
 
 				<_.Admin_Content ref={contentRef}>
 					{users.map((item) => (
-						<_.Admin_Content_Layout key={item.userid}>
+						<_.Admin_Content_Layout
+							key={item.userid}
+							onClick={() => openModal(item)}
+						>
 							<_.Admin_UserName>
 								{item.userid} ({item.isAdmin ? 'Admin' : 'User'})
 							</_.Admin_UserName>
@@ -94,8 +127,10 @@ const Admin = () => {
 							</_.Admin_Button>
 						</_.Admin_Content_Layout>
 					))}
-					{isFetching && <Loading />}
+					{isFetching && !isSearch && <Loading />}
 				</_.Admin_Content>
+
+				<_.Admin_Modal></_.Admin_Modal>
 			</_.Admin_Layout>
 		</_.Admin_Container>
 	);

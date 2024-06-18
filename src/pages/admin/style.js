@@ -65,6 +65,7 @@ export const Admin_Content_Layout = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	padding: 3% 3%;
+	cursor: pointer;
 `;
 
 export const Admin_UserName = styled.div`
@@ -83,4 +84,15 @@ export const Admin_Button = styled.button`
 	width: 100px;
 	height: 30px;
 	border-radius: 6px;
+	cursor: pointer;
+`;
+
+export const Admin_Modal = styled.div`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 300px;
+	height: 300px;
+	background-color: black;
 `;
