@@ -7,9 +7,12 @@ import * as _ from './style';
 import Header from '../../components/header';
 import UploadingImg from '../../assets/img/UploadImg.svg';
 import { Upload_Img, Upload_Post, Update_Post } from '../../libs/api/Post';
-import Swal from 'sweetalert2';
 import { AuthState } from '../../libs/api/Auth';
 import Loading from '../loading';
+import {
+	top_right_FalseAlert,
+	top_right_TrueAlert,
+} from '../../libs/utils/alert/top_right_Alert';
 
 const WriteDetail = () => {
 	const history = useNavigate();
@@ -24,23 +27,11 @@ const WriteDetail = () => {
 	});
 	useEffect(() => {
 		if (!WriteData) {
-			Swal.fire({
-				position: 'top-end',
-				icon: 'error',
-				title: '글을 작성해주세요',
-				showConfirmButton: false,
-				timer: 1500,
-			});
+			top_right_FalseAlert('글을 작성해주세요');
 			history('/write');
 		}
 		if (isError) {
-			Swal.fire({
-				position: 'top-end',
-				icon: 'error',
-				title: '로그인 후 이용해주세요',
-				showConfirmButton: false,
-				timer: 1500,
-			});
+			top_right_FalseAlert('로그인 후 이용해주세요');
 			history('/auth/signin');
 		}
 	});
@@ -87,13 +78,7 @@ const WriteDetail = () => {
 		Upload_Post,
 		{
 			onSuccess: (res) => {
-				Swal.fire({
-					position: 'top-end',
-					icon: 'success',
-					title: '게시글 작성이 완료되었습니다.',
-					showConfirmButton: false,
-					timer: 1500,
-				});
+				top_right_TrueAlert('게시글 작성이 완료되었습니다.');
 				history('/');
 				window.location.reload();
 			},
@@ -105,13 +90,7 @@ const WriteDetail = () => {
 
 	const onSubmit = () => {
 		if (!data.subheading) {
-			Swal.fire({
-				position: 'top-end',
-				icon: 'error',
-				title: '소제목을 입력해주세요.',
-				showConfirmButton: false,
-				timer: 1500,
-			});
+			top_right_FalseAlert('소제목을 입력해주세요.');
 		} else {
 			UploadPost({
 				...data,
@@ -125,14 +104,7 @@ const WriteDetail = () => {
 		Update_Post,
 		{
 			onSuccess: (res) => {
-				console.log(res);
-				Swal.fire({
-					position: 'top-end',
-					icon: 'success',
-					title: '게시글 수정이 완료되었습니다.',
-					showConfirmButton: false,
-					timer: 1500,
-				});
+				top_right_TrueAlert('게시글 수정이 완료되었습니다.');
 				history('/');
 				window.location.reload();
 			},
@@ -143,13 +115,7 @@ const WriteDetail = () => {
 	);
 	const onEdit = () => {
 		if (!data.subheading) {
-			Swal.fire({
-				position: 'top-end',
-				icon: 'error',
-				title: '소제목을 입력해주세요.',
-				showConfirmButton: false,
-				timer: 1500,
-			});
+			top_right_FalseAlert('소제목을 입력해주세요.');
 		} else {
 			UpdatePost({
 				...data,

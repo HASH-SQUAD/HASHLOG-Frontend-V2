@@ -36,13 +36,7 @@ const Setting = () => {
 	);
 	useEffect(() => {
 		if (isError) {
-			Swal.fire({
-				position: 'top-end',
-				icon: 'error',
-				title: '로그인 후 이용해주세요',
-				showConfirmButton: false,
-				timer: 1500,
-			});
+			top_right_FalseAlert('로그인 후 이용해주세요');
 			history('/auth/signin');
 		}
 	});

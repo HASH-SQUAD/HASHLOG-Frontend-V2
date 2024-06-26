@@ -10,6 +10,7 @@ import { useMutation, useQuery } from 'react-query';
 import { DeletePostById, GetPostById } from '../../libs/api/Post';
 import { AuthState } from '../../libs/api/Auth';
 import Loading from '../loading';
+import { top_right_TrueAlert } from '../../libs/utils/alert/top_right_Alert';
 
 const Single = () => {
 	const history = useNavigate();
@@ -54,13 +55,7 @@ const Single = () => {
 		(postId) => DeletePostById({ postId }),
 		{
 			onSuccess: (res) => {
-				Swal.fire({
-					position: 'top-end',
-					icon: 'success',
-					title: '정상적으로 삭제되었습니다.',
-					showConfirmButton: false,
-					timer: 1500,
-				});
+				top_right_TrueAlert('정상적으로 삭제되었습니다.');
 				history('/');
 			},
 		}

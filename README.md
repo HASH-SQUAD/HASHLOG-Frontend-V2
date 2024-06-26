@@ -1,3 +1,9 @@
+# #ASHLOG
+<img width="1389" alt="image" src="https://github.com/HASH-SQUAD/HASHLOG_Frontend_V2/assets/82251632/47059b3e-fc94-43ec-aed4-a4399cebf2bc">
+
+Team-#ASH에서 제작한 간단한 블로그프로젝트
+
+
 # 커밋규칙
 | type | description |
 | --- | --- |
