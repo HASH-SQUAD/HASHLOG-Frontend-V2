@@ -9,6 +9,7 @@ import Single from '../pages/single';
 import Write from '../pages/write';
 import WriteDeatil from '../pages/writeDetail';
 import Setting from '../pages/setting';
+import Admin from '../pages/admin';
 
 export default function Router() {
 	return useRoutes([
@@ -26,6 +27,10 @@ export default function Router() {
 				{ path: '/post/:id', element: <Single /> },
 				{ path: '/write', element: <Write /> },
 				{ path: '/writedetail', element: <WriteDeatil /> },
+				{
+					path: `/${process.env.REACT_APP_ADMIN_ORIGIN}`,
+					element: <Admin />,
+				},
 				{ path: '/setting', element: <Setting /> },
 				{ path: '404', element: <Page404 /> },
 				{ path: '*', element: <Navigate to="/404" replace /> },
