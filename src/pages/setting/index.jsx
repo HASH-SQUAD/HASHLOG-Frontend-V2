@@ -36,13 +36,7 @@ const Setting = () => {
 	);
 	useEffect(() => {
 		if (isError) {
-			Swal.fire({
-				position: 'top-end',
-				icon: 'error',
-				title: '로그인 후 이용해주세요',
-				showConfirmButton: false,
-				timer: 1500,
-			});
+			top_right_FalseAlert('로그인 후 이용해주세요');
 			history('/auth/signin');
 		}
 	});
@@ -229,7 +223,7 @@ const Setting = () => {
 						이미지 업로드
 					</_.Setting_Upload_ProfileImg_Label>
 
-					<_.Setting_Upload_ProfileImg	
+					<_.Setting_Upload_ProfileImg
 						id='ImgUploadInput'
 						type='file'
 						accept='.png, .jpeg, .jpg'

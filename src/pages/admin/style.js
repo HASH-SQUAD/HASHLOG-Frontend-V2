@@ -86,13 +86,3 @@ export const Admin_Button = styled.button`
 	border-radius: 6px;
 	cursor: pointer;
 `;
-
-export const Admin_Modal = styled.div`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 300px;
-	height: 300px;
-	background-color: black;
-`;

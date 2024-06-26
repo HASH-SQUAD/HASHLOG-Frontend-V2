@@ -2,12 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
-import Swal from 'sweetalert2';
 
 import * as _ from './style';
 import Logo from '../../assets/img/Login_Logo.svg';
 import { AuthSignIn, AuthState } from '../../libs/api/Auth';
 import Loading from '../loading';
+import {
+	top_right_FalseAlert,
+	top_right_TrueAlert,
+} from '../../libs/utils/alert/top_right_Alert';
 
 const SignIn = () => {
 	const history = useNavigate();
@@ -33,25 +36,12 @@ const SignIn = () => {
 				console.log(res);
 				localStorage.setItem('accessToken', res.accessToken);
 				localStorage.setItem('refreshToken', res.refreshToken);
-				Swal.fire({
-					position: 'top-end',
-					icon: 'success',
-					title: '정상적으로 로그인 되었습니다.',
-					showConfirmButton: false,
-					timer: 1500,
-				});
+				top_right_TrueAlert('정상적으로 로그인 되었습니다.');
 				history('/');
 			},
 			onError: (err) => {
-				Swal.fire({
-					position: 'top-end',
-					icon: 'error',
-					title: err.response.data.message,
-					showConfirmButton: false,
-					timer: 1500,
-				});
+				top_right_FalseAlert(err.response.data.message);
 				console.log(err.response.data.message);
-				console.log(err);
 			},
 		}
 	);

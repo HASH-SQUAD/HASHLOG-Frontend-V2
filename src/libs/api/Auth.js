@@ -54,3 +54,10 @@ export const Get_UserById = async params => {
 	const { data } = await AuthInstance.post(`/auth/admincrhinqi`, params);
 	return data;
 };
+
+export const Admin_Permission = async params => {
+	const { data } = await AuthInstance.post(`/auth/admin`, params);
+	return data;
+};
+
+

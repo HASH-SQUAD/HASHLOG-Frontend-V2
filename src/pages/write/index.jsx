@@ -4,7 +4,6 @@ import ReactQuill from 'react-quill';
 import * as DOMPurify from 'isomorphic-dompurify';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
-import Swal from 'sweetalert2';
 
 //style
 import * as _ from './style.js';
@@ -15,6 +14,7 @@ import Header from '../../components/header';
 import Left_Arrow from '../../assets/img/Left_Arrow.svg';
 import { Upload_Img } from '../../libs/api/Post.js';
 import { AuthState } from '../../libs/api/Auth.js';
+import { top_right_FalseAlert } from '../../libs/utils/alert/top_right_Alert.js';
 
 const Write = () => {
 	const history = useNavigate();
@@ -28,13 +28,7 @@ const Write = () => {
 	});
 	useEffect(() => {
 		if (isError) {
-			Swal.fire({
-				position: 'top-end',
-				icon: 'error',
-				title: '로그인 후 이용해주세요',
-				showConfirmButton: false,
-				timer: 1500,
-			});
+			top_right_FalseAlert('로그인 후 이용해주세요');
 			history('/auth/signin');
 		}
 	});
@@ -107,23 +101,11 @@ const Write = () => {
 
 	const onSubmit = () => {
 		if (!title) {
-			Swal.fire({
-				position: 'top-end',
-				icon: 'error',
-				title: '제목을 입력해주세요',
-				showConfirmButton: false,
-				timer: 1500,
-			});
+			top_right_FalseAlert('제목을 입력해주세요');
 			return;
 		}
 		if (!value) {
-			Swal.fire({
-				position: 'top-end',
-				icon: 'error',
-				title: '내용을 입력해주세요',
-				showConfirmButton: false,
-				timer: 1500,
-			});
+			top_right_FalseAlert('내용을 입력해주세요');
 			return;
 		}
 		history('/writedetail', {
