@@ -131,7 +131,7 @@ const Admin = () => {
 			onSuccess: (res) => {
 				top_right_TrueAlert(res.message);
 				setTimeout(() => {
-					history(0);
+					history('/');
 				}, 1000);
 			},
 			onError: (err) => {
