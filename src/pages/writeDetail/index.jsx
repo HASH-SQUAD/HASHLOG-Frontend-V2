@@ -80,7 +80,7 @@ const WriteDetail = () => {
 			onSuccess: (res) => {
 				top_right_TrueAlert('게시글 작성이 완료되었습니다.');
 				history('/');
-				window.location.reload();
+				history(0);
 			},
 			onError: (err) => {
 				console.log(err);
@@ -106,7 +106,7 @@ const WriteDetail = () => {
 			onSuccess: (res) => {
 				top_right_TrueAlert('게시글 수정이 완료되었습니다.');
 				history('/');
-				window.location.reload();
+				history(0);
 			},
 			onError: (err) => {
 				console.log(err);
