@@ -1,4 +1,4 @@
-const PostData = [
+const PostData = [ 
 	{
 		id: '1',
 		imgURL:
