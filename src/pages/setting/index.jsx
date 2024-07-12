@@ -53,7 +53,7 @@ const Setting = () => {
 				Update_ProfileImg({ profileImg: res.url });
 				top_right_TrueAlert('성공적으로 수정되었습니다.');
 				setTimeout(() => {
-					history('/');
+					history(0);
 				}, 1000);
 			},
 		}
@@ -73,7 +73,7 @@ const Setting = () => {
 		DeleteProfile();
 		top_right_TrueAlert('성공적으로 삭제되었습니다.');
 		setTimeout(() => {
-			history('/');
+			history(0);
 		}, 1000);
 	};
 
@@ -83,7 +83,7 @@ const Setting = () => {
 			onSuccess: (res) => {
 				top_right_TrueAlert(res.message);
 				setTimeout(() => {
-					history('/');
+					history(0);
 				}, 1000);
 			},
 			onError: (err) => {
@@ -118,7 +118,7 @@ const Setting = () => {
 			onSuccess: (res) => {
 				top_right_TrueAlert(res.message);
 				setTimeout(() => {
-					history('/');
+					history(0);
 				}, 1000);
 			},
 			onError: (err) => {
@@ -169,7 +169,7 @@ const Setting = () => {
 				setTimeout(() => {
 					localStorage.removeItem('accessToken');
 					localStorage.removeItem('refreshToken');
-					history('/');
+					history(0);
 				}, 1000);
 			},
 			onError: (err) => {
