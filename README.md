@@ -34,8 +34,6 @@
 - 작성된 글을 확인 할 수 있습니다.
 - 공유하기 버튼을 누르면 모달이 뜨며 url이 복사 됩니다.
 <img width="1000" alt="image" src="https://github.com/HASH-SQUAD/HASHLOG-Frontend/assets/128370710/a6f2c3fa-a51c-413b-830f-e8048d64c282">
-<img width="1000" alt="image" src="https://github.com/HASH-SQUAD/HASHLOG-Frontend/assets/128370710/5cccae55-e3e8-42f7-93e4-d6b4597d009f">
-
             
             
 ## 개발하면서 느낀점(좋았던 점, 아쉬웠던 점) 😀
